@@ -1,7 +1,7 @@
 function Portfolio(){
     return(
         <div className="container-fluid">
-        <nav className="navbar navbar-expand-md navbar-light bg-light">
+        <nav className="navbar navbar-expand-md">
           <div className="container title">
             <a className="navbar-brand fw-bold fs-5 text-dark" href="#/home">Malik.Isadev</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,12 +41,7 @@ function Portfolio(){
                 </p>
                 <a href="https://postr-inc.me" className="btn btn-primary" type="button">View Project</a>
               </div>
-              <img
-                className="img-fluid"
-                src="https://user-images.githubusercontent.com/65188863/231509384-e309895e-be59-4fdc-90a7-4413decf98f2.jpg"
-                alt="..."
-                width={300}
-              />
+               
             </div>
           </div>
         </div>
