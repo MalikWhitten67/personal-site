@@ -4,7 +4,7 @@ require('./components/styles/app.scss')
 function App() {
   return (
     <div className="container-fluid">
-      <nav className="navbar navbar-expand-md navbar-light bg-light">
+      <nav className="navbar navbar-expand-md">
         <div className="container title">
           <a className="navbar-brand fw-bold fs-5 text-dark" href="#/">Malik.Isadev</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
