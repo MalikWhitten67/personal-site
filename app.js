@@ -5,7 +5,7 @@ let App = require('./components/App.jsx')
 let Portfolio = require('./components/Portfolio.jsx')
    
 router.root("/home", (req, res) => {
-     res.title("Home")
+     res.title("Malik.isadev")
      res.return()
      res.jsx(<App />)
      res.return()
@@ -14,7 +14,7 @@ router.root("/home", (req, res) => {
  
  
 router.on("/portfolio", (req, res) => {
-    res.title("Portfolio")
+    res.title("My Portfolio")
     res.return()
     res.jsx(<Portfolio />)
 })
@@ -22,7 +22,7 @@ router.on("/portfolio", (req, res) => {
    
    
 router.on("/home", (req, res) => {
-     res.title("Home")
+    res.title("Malik.isadev")
     res.return()
     res.jsx(<App />)
     res.return()
