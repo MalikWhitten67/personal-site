@@ -4,6 +4,7 @@ require('./components/styles/app.scss')
 function App() {
   const dark = useState(null)
   let body = document.querySelector("body")
+  console.log(body)
   {/* may not work */}
   const darkclick = () =>{
        body.classList.toggle("dark-mode");
@@ -23,7 +24,7 @@ function App() {
                 <a className="nav-link fw-bold fs-5 text-dark" href="#/portfolio">Portfolio</a>
               </li>
               <li className="nav-item">
-               <i class="bi bi-moon" onClick={()=> darkclick} width={50}></i>
+               <i className="bi bi-moon" onClick={()=> darkclick} width={50}></i>
               </li>
             </ul>
           </div>
