@@ -2,6 +2,13 @@
 require('./components/styles/app.scss')
 
 function App() {
+  const dark = useState(null)
+  let body = document.querySelector("body")
+  {/* may not work */}
+  const darkclick = () =>{
+       body.classList.toggle("dark-mode");
+       body.classList.toggle("text-white");
+   }
   return (
     <div className="container-fluid">
       <nav className="navbar navbar-expand-md">
@@ -14,6 +21,9 @@ function App() {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link fw-bold fs-5 text-dark" href="#/portfolio">Portfolio</a>
+              </li>
+              <li className="nav-item">
+               <i class="bi bi-moon" onClick={()=> darkclick} width={50}></i>
               </li>
             </ul>
           </div>
