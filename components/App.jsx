@@ -24,7 +24,7 @@ function App() {
                 <a className="nav-link fw-bold fs-5 text-dark" href="#/portfolio">Portfolio</a>
               </li>
               <li className="nav-item">
-               <i className="bi bi-moon" onClick={()=> darkclick} width={50}></i>
+               <i className="bi bi-moon" onClick={darkclick} width={50}></i>
               </li>
             </ul>
           </div>
