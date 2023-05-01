@@ -1,15 +1,25 @@
-
-require('./components/styles/app.scss')
-
 function App() {
   const dark = useState(null)
+  let img = useState(null)
   let body = document.querySelector("body")
-  console.log(body)
-  {/* may not work */}
-  const darkclick = () =>{
-       body.classList.toggle("dark-mode");
-       body.classList.toggle("text-white");
-   }
+ 
+   
+  const darkclick = () => {
+    body.classList.toggle("bg-dark");
+    body.classList.toggle("text-light");
+    body.classList.toggle("light-mode");
+    body.style.transition = "all 0.5s ease"
+    dark.current.classList.toggle("bi-moon-fill")
+    dark.current.style.transition = "all 0.5s ease"
+    img.current.style.transition = "all 0.5s ease"
+    img.current.classList.toggle("bg-dark")
+    img.current.classList.toggle("border-0")
+    img.current.classList.toggle("bg-light")
+    img.current.classList.toggle("img-thumbnail")
+    img.current.style.backgroundColor = "transparent"
+     
+  }
+  
   return (
     <div className="container-fluid">
       <nav className="navbar navbar-expand-md">
@@ -24,7 +34,9 @@ function App() {
                 <a className="nav-link fw-bold fs-5 text-dark" href="#/portfolio">Portfolio</a>
               </li>
               <li className="nav-item">
-               <i className="bi bi-moon" onClick={darkclick} width={50}></i>
+               <i style={{cursor:"pointer"}} 
+                ref={dark}
+               className=" fs-3 ms-4 bi bi-brightness-high" onClick={darkclick} width={50}></i>
               </li>
             </ul>
           </div>
@@ -41,7 +53,9 @@ function App() {
             src="https://th.bing.com/th/id/R.ae491eeb393fa4fa10ff14072b45a276?rik=qbXgrNVuGqFjIA&pid=ImgRaw&r=0"
             className="img-fluid"
             width="120"
+            style={{backgroundColor: "transparent"}}
             alt="..."
+            ref={img}
           ></img>
         </div>
       </div>
