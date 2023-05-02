@@ -122,7 +122,7 @@ function App() {
               width={40}
             ></img>
             
-            <img src='./components/static/assets/img/visijs.png' className='ms-2 m-1 rounded' width={30}></img>
+            <img src='./components/static/assets/img/visilogo.png' className='ms-2 m-1 rounded' width={30}></img>
             <img className='ms-2 rounded' src='https://img.icons8.com/?size=512&id=PXTY4q2Sq2lG&format=png'
               width={40}
             ></img>
