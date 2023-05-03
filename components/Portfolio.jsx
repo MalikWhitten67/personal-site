@@ -50,7 +50,7 @@ function Portfolio(){
           <div className="card-body p-0">
             <div className="d-flex align-items-center">
               <div className="p-5">
-                <h2 className="fw-bolder">Visi.js <img src="./components/static/assets/img/visijs.png" 
+                <h2 className="fw-bolder">Visi.js <img src="./components/static/assets/img/visilogo.png" 
                 className="img-fluid rounded-circle"
                 alt="" width={30} height={30}/></h2>
                 <p>
