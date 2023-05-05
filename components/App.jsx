@@ -1,132 +1,156 @@
-require('@tailwindcss/typography') // require tailwind css
-require('./components/static/styles/app.css')
-let Nav = require('./components/Nav.jsx')
 function App() {
-    const btncopy = useRef(null)
-    const [copied, setCopied] = useState(false)
-    useEffect(() => {
-        if (copied) {
-            btncopy.current.innerText = 'Copied!'
-            setTimeout(() => {
-                btncopy.current.innerText = '📋 npm i visi.js'
-                btncopy.current.style.backgroundColor = 'white'
-                setCopied(false)
-            }, 2000)
-        }
-    }, [copied])
+  const dark = useState(null)
+  let img = useState(null)
+  let body = document.querySelector("body")
+ 
+   
+  const darkclick = () => {
+    body.classList.toggle("bg-dark");
+    body.classList.toggle("text-light");
+    body.classList.toggle("light-mode");
+    body.style.transition = "all 0.5s ease"
+    dark.current.classList.toggle("bi-moon-fill")
+    dark.current.style.transition = "all 0.5s ease"
+    img.current.style.transition = "all 0.5s ease"
+    img.current.classList.toggle("bg-dark")
+    img.current.classList.toggle("border-0")
+    img.current.classList.toggle("bg-light")
+    img.current.classList.toggle("img-thumbnail")
+    img.current.style.backgroundColor = "transparent"
+     
+  }
+  
+  return (
+    <div className="container-fluid">
+      <nav className="navbar navbar-expand-md">
+        <div className="container title">
+          <a className="navbar-brand fw-bold fs-5 text-dark" href="#/">Malik.Isadev</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link fw-bold fs-5 text-dark" href="#/portfolio">Portfolio</a>
+              </li>
+              <li className="nav-item">
+               <i style={{cursor:"pointer"}} 
+                ref={dark}
+               className=" fs-3 ms-4 bi bi-brightness-high" onClick={darkclick} width={50}></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-    console.log('App component');
-    return (
-        <div>
-            {/*navbar mobile*/}
+      <div className="row mt-5">
+        <div className="col-md-6 offset-md-3 text-center">
+          <h1 className="fw-bold fs-2 text-dark">Malik Isadev
 
-            <Nav />
+          </h1>
+          <p className="lead">Software Engineer | Full Stack Web Developer.</p>
+          <img
+            src="https://th.bing.com/th/id/R.ae491eeb393fa4fa10ff14072b45a276?rik=qbXgrNVuGqFjIA&pid=ImgRaw&r=0"
+            className="img-fluid"
+            width="120"
+            style={{backgroundColor: "transparent"}}
+            alt="..."
+            ref={img}
+          ></img>
+        </div>
+      </div>
+      <div className='text-center'>
+        <div className="container p-4 pb-0">
+          {/* Section: Social media */}
+          <section className="mb-4">
+            {/* Facebook */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="#!"
+              role="button"
+            >
+              <i className="bi bi-facebook" />
+            </a>
+            {/* Twitter */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="#!"
+              role="button"
+            >
+              <i className="bi bi-twitter" />
+            </a>
+            {/* Google */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="#!"
+              role="button"
+            >
+              <i className="bi bi-google" />
+            </a>
+            {/* Instagram */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="#!"
+              role="button"
+            >
+              <i className="bi bi-instagram" />
+            </a>
+            {/* Linkedin */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="#!"
+              role="button"
+            >
+              <i className="bi bi-linkedin" />
+            </a>
+            {/* Github */}
+            <a
+              className="btn btn-outline-dark btn-floating m-1"
+              href="https://github.com/MalikWhitten67"
+              role="button"
+            >
+              <i className="bi bi-github" />
+            </a>
+          </section>
+          <section className="column  justify-content-between">
+            <span className='fw-bold fs-4 m-1'>Stack |</span>
 
-
-            <main>
-                <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                    <div className="px-4 py-6 sm:px-0 text-center">
-                        <div className="text-center overflow-hidden shadow-sm sm:rounded-lg">
-                            <p style={{ margin: "auto", width: "75%" }} className='fw-bold text-6xl text-white mx-4 mt-6'>
-                                Not a Framework, Just A Library!
-                            </p>
-                            <p style={{ margin: "auto", width: "75%", marginTop: "30px" }} className='text-slate-900 mt-12 text-lg'>
-                                Visi.js is a library that streamlines the development of single-page applications by abstracting away complexity and enabling multi-page functionality
-                            </p>
-
-                        </div>
-                    </div>
-                    <div className="px-4 py-6 sm:px-0 text-center">
-                        <div className="text-center overflow-hidden shadow-sm sm:rounded-lg">
-                            <button
-                                ref={btncopy}
-                                onClick={() => {
-                                    navigator.clipboard.writeText('npm i visi.js')
-                                    setCopied(true)
-
-                                }}
-
-                                className='bg-white text-slate font-5xl fw-bold    py-2 px-7   rounded shadow'>
-                                📋 npm i visi.js
-                            </button>
-                            <button onClick={()=> window.location.hash="#/about"} className='bg-white mx-2 text-slate font-5xl fw-bold    py-2 px-7  rounded shadow'>
-                                Learn More
-                            </button>
-                            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                                <p className="text-white mt-20 justify-center text-center fw-bold text-2xl">
-                                    Works With
-                                </p>
-                                <div
-                                    style={{ marginTop: "1em" }}
-                                    className="flex justify-center space-x-12 "
-                                >
-                                    <div className="mt-12">
-                                        <p className="text-white text-2xl mt-2">
-                                            <i className="fab fa-react text-blue-500 text-3xl inline-block"></i> React
-                                        </p>
-                                        <p className="text-slate-400  mt-2">
-                                            Visi.js integrates seamlessly with your existing React workflows, making it easy to get started.
-                                        </p>
-                                    </div>
-                                    <div className="mt-12">
-                                        <p className="text-white text-2xl mt-2">
-                                            <img loading="lazy"src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" alt="Tailwind CSS" className="h-12 mx-3 w-12 inline-block" /> Tailwind CSS
-                                        </p>
-
-                                        <p className="text-slate-400 mt-2">
-                                            Visi.js is compatible with Tailwind CSS, allowing you to quickly and easily create beautiful, responsive designs.
-                                        </p>
-                                    </div>
-                                    <div className="mt-12">
-                                        <p className="text-white text-2xl mt-2">
-                                            <img loading="lazy"  src="https://img.icons8.com/?size=512&id=wpZmKzk11AzJ&format=png" alt="TypeScript" className="h-12 mx-3 w-12 inline-block" /> TypeScript
-                                        </p>
-                                        <p className="text-slate-400 mt-2">
-                                            Visi.js includes extensive support for typescript applications.
-                                        </p>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </main>
-
-            <footer className="w-full py-8   bottom-0  ">
-                <div className="max-w-screen-xl mx-auto px-4">
-                    <div className="flex   justify-between">
-                        <div className="flex items-center">
-                            <p className="text-white text-xl font-bold">Built With</p>
-                            <img loading="lazy" className="h-8 w-8 rounded mr-2 mx-4" src="./components/static/images/visilogo.png" alt="Visi.js Logo" />
-                        </div>
-
-
-                        <div>
-                            <div className="flex float-right  ">
-                                <i className="fa-brands text-white text-2xl fa-github"></i>
-                                <i className="fa-brands text-white text-2xl fa-discord mx-6"></i>
-                                <i className="fa-brands text-white text-2xl fa-twitter mx-5"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="flex justify-between mt-8">
-                        <div className="flex items-center">
-                            <p className="text-white text-sm font-semibold">© 2023 Visi.js All Rights Reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-
+            <img className='ms-2 m-1' src='https://img.icons8.com/?size=512&id=7gdY5qNXaKC0&format=png'
+              width={40}
+            ></img>
+            <img className='ms-2 m-1' src='https://img.icons8.com/?size=512&id=20909&format=png'
+              width={40}
+            ></img>
+            
+            <img src='./components/static/assets/img/visilogo.png' className='ms-2 m-1 rounded' width={30}></img>
+            <img className='ms-2 rounded' src='https://img.icons8.com/?size=512&id=PXTY4q2Sq2lG&format=png'
+              width={40}
+            ></img>
+            <img src="https://img.icons8.com/?size=512&id=hsPbhkOH4FMe&format=png" width={40}
+            className='ms-2 rounded'
+            ></img>
+          </section>
 
         </div>
+      </div>
 
 
+      <footer className="column mt-5">
+        <footer className=" text-center text-dark">
 
-    )
+          <div
+            className="text-center p-3"
+
+          >
+            © 2023 Copyright:
+
+            Malik.Isadev | All Rights Reserved
+
+          </div>
+          {/* Copyright */}
+        </footer>
+
+      </footer>
+    </div>
+  );
 }
