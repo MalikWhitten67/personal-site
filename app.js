@@ -1,13 +1,13 @@
 ErrorTrace()
 const router = new ReactRouter()
 router.bindRoot("app")
-let App = require('./components/App.jsx')
-let Portfolio = require('./components/Portfolio.jsx')
-   
 router.root("/home", (req, res) => {
      res.title("Malik.isadev")
      res.return()
-     res.jsx(<App />)
+     dispose('./components/App.jsx', (Component) =>{
+     res.jsx(<Component/>)
+     res.return()
+    }, null)
      res.return()
 
 })
@@ -17,7 +17,10 @@ router.root("/home", (req, res) => {
 router.on("/portfolio", (req, res) => {
     res.title("My Portfolio")
     res.return()
-    res.jsx(<Portfolio />)
+    dispose('./components/Portfolio.jsx', (Component) =>{
+     res.jsx(<Component/>)
+     res.return()
+    }, null)
 })
    
    
@@ -25,7 +28,10 @@ router.on("/portfolio", (req, res) => {
 router.on("/home", (req, res) => {
     res.title("Malik.isadev")
     res.return()
-    res.jsx(<App />)
+     dispose('./components/App.jsx', (Component) =>{
+     res.jsx(<Component/>)
+     res.return()
+    }, null)
     res.return()
 
 })
