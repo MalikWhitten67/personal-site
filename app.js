@@ -1,4 +1,3 @@
-ErrorTrace()
 const router = new ReactRouter()
 router.bindRoot("app")
 lib('@tailwind/daisyui')
