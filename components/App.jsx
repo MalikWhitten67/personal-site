@@ -52,6 +52,7 @@ function App() {
                 </span>
                   <img
               className="rounded mx-2   h-5 w-5"
+              alt="visi.js logo"
               src="https://postr-inc.github.io/visi.js/assets/images/visilogo.png"/>
               </a>
             </div>
