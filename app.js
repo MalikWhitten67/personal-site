@@ -1,4 +1,3 @@
-ErrorTrace()
 const router = new ReactRouter()
 router.bindRoot("app")
 router.root("/home", (req, res) => {
