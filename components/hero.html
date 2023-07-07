@@ -1,0 +1,48 @@
+<var name="github_link">
+    https://github.com/MalikWhitten67
+</var>
+<var name="twitter_link">
+    https://twitter.com/malik2476057345
+</var>
+<var name="discord_uuid">
+    popcorntart
+</var>
+ 
+<hero>
+  
+    <div class="mx-auto xl:px-16 lg:px-16 p-8 grid xl:grid-cols-2   lg:grid-cols-2">
+         
+        <div class="xl:text-6xl lg:text-6xl text-3xl font-bold font-sans  ">
+           Hello There 👋
+           <span class="flex mt-8 flex-col">
+            <ul class="menu   menu-horizontal bg-base-200 rounded-box xl:w-fit w-fit gap-8">
+                <li><a
+                href="{{twitter_link}}"    
+                ><img src="./assets/images/twitter.png" alt="twitter" class="w-6 h-6"></a></li>
+                <li><a
+                href="{{github_link}}"
+                ><img src="./assets/images/github.png" alt="github" class="w-6 h-6"></a></li>
+                <li  ><div class="dropdown   dropdown-hover">
+                    <label tabindex="0"   >
+                        <img src="./assets/images/discord.png" alt="discord" class="hover:cursor w-6 h-6">
+                    </label>
+                    <ul tabindex="0" class="dropdown-content z-[1] flex mt-32 mx-auto menu p-2 shadow bg-base-100 rounded-box w-fit">
+                      <input type="text" class="input border border-black input-bordered" readonly value="{{discord_uuid}}"
+                      onclick="this.select();document.execCommand('copy');"
+                      >
+                    </ul>
+                  </div></li>
+              </ul>
+           
+            
+        </span>
+        </div>
+       <img src="https://avatars.githubusercontent.com/u/65188863?s=400&u=b7d63582957291196c230b21c3672a616d494fb8&v=4"
+        alt="stats" class="rounded-full w-64  xl:flex hidden lg:flex">
+    </div>
+   
+    
+</hero>
+<export>
+    hero
+</export>
