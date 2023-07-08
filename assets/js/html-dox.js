@@ -1,1 +1,1742 @@
-let e,t,r,n=[],o=document.querySelector("imports"),i=document.querySelector("[imports]");if(i)r=i.getAttribute("imports").replace(/\s/g,"");else if(o)throw new Error('<imports> is deprecated use <meta imports="/someimport,/someimport"> instead! read latest git release for more info: https://github.com/MalikWhitten67/html-dox/releases/latest');r=r.split(","),r=r.filter(Boolean);let l={},a=[],s={"dox:string":String,"dox:number":Number,"dox:boolean":Boolean,"dox:array":Array,"dox:object":Object,"dox:undefined":void 0,"dox:null":null,"dox:function":Function,"dox:regexp":RegExp,"dox:date":Date},c=sessionStorage.getItem("$dox-props")?JSON.parse(sessionStorage.getItem("$dox-props")):{};r.map((e=>{if(!(e.endsWith(".html")||e.endsWith(".css")||e.endsWith(".js")))throw new Error("Unsupported imported file type!");if(e.endsWith(".js")){let t=document.createElement("link");t.setAttribute("rel","preload"),t.setAttribute("href",e),t.type="text/javascript",t.setAttribute("as","script"),document.querySelector("head").appendChild(t),l[e]?l[e]:fetch(e).then((e=>e.text())).then((t=>{if(t.includes("document")&&!e.includes("tailwind.js"))throw new Error("Imported JS file cannot contain document. Use dox instead.");if((t.includes("innerHTML")||t.includes("innerText"))&&!e.endsWith("tailwind.js"))throw new Error("Use dox:text to return text and dox:$ to return HTML.");let r=document.createElement("script");r.id="dox-script",r.type="module",r.innerHTML=t,document.head.appendChild(r)}))}if(e.endsWith(".html")){let t=document.createElement("link");t.setAttribute("rel","preload"),t.setAttribute("href",e),t.type="text/html",t.setAttribute("as","document"),document.querySelector("head").appendChild(t),l[e]?u(l[e]):fetch(e).then((e=>e.text())).then((async t=>{l[e]=t,await u(t)}))}}));const u=async r=>{let o=(new DOMParser).parseFromString(r,"text/html");o=o.body;let i=document.body;o.querySelectorAll("var").forEach((e=>{let t=e.getAttribute("name"),r=e.innerHTML;e.innerHTML.length>0?window[t]=r:window[t]="",o.innerHTML=o.innerHTML.replace(`{{${t}}}`,r),e.remove()})),o.querySelectorAll("*").forEach((async e=>{if(e.innerHTML.includes("{{")){let t=e.innerHTML.match(/{{(.*?)}}/gs);t&&t.forEach((async e=>{let t=e.split("{{")[1].split("}}}")[0].trim();if(t.startsWith("map(")&&t.endsWith("}}")){e=e.replace("&gt;",">");let n=t.split("map(")[1].split(")")[0],i=e.split("return(")[1].split("){")[0].trim(),l=e.split("){")[1].trim().split("}}")[0].trim();l=l.replace(/json\./g,"");let a=document.createElement("div");async function r(e){let t,r;if(e&&e.data&&e.data.name==n){a.innerHTML="",t=e.data.name,r=e.data.value,parsed=JSON.parse(JSON.stringify(window[t]));let c,u;function s(e){return new Promise((t=>{if(document.querySelector(e))return t(document.querySelector(e));const r=new MutationObserver((n=>{document.querySelector(e)&&(t(document.querySelector(e)),r.disconnect())}));r.observe(document.body,{childList:!0,subtree:!0})}))}i.length>0?(c=new Function("json",`return ${n}.${i}`),u=c(parsed)):u=parsed,u.forEach((e=>{let t,r=l;Object.entries(e).forEach((([e,t])=>{r=r.replace(new RegExp(`{${e}}`,"g"),t)})),t=r,a.innerHTML=a.innerHTML+t}));let d=await s(`[map="${n}"]`);if(d){let p=document.createElement("div");p.innerHTML=a.innerHTML,p.setAttribute("container-map",n),d.querySelector(`[container-map="${n}"]`)?d.querySelector(`[container-map="${n}"]`).innerHTML=a.innerHTML:d.appendChild(p)}o.innerHTML.includes("{{")&&(o.innerHTML=o.innerHTML.replace(/{{(.*?)}}/gs,""))}else if(window[n]){a.innerHTML="";let h,y,f=JSON.parse(window[n]);function s(e){return new Promise((t=>{if(document.querySelector(e))return t(document.querySelector(e));const r=new MutationObserver((n=>{document.querySelector(e)&&(t(document.querySelector(e)),r.disconnect())}));r.observe(document.body,{childList:!0,subtree:!0})}))}i.length>0?(h=new Function("json",`return ${n}.${i}`),y=h(f)):y=f,y.forEach((e=>{let t,r=l;Object.entries(e).forEach((([e,t])=>{r=r.replace(new RegExp(`{${e}}`,"g"),t)})),t=r,a.innerHTML=a.innerHTML+t}));let m=await s(`[map="${n}"]`);if(m)if(0==m.innerHTML.length)m.innerHTML=a.innerHTML;else if(m.innerHTML.length>0)if(m.querySelector(`[container-map="${n}"]`))m.querySelector(`[container-map="${n}"]`).innerHTML=a.innerHTML;else{let w=document.createElement("div");w.innerHTML=a.innerHTML,w.setAttribute("container-map",n),m.appendChild(w)}}}r(),window.addEventListener("message",(e=>{e.origin==window.location.origin&&"setVar"==e.data.type&&(o.querySelectorAll("var").forEach((t=>{if(t.hasAttribute("typeof")){let r=t.getAttribute("typeof").split("{{:")[1].split("}}")[0],n=e.data.data.value;if("<Json>"===r)try{JSON.parse(n)}catch(e){throw new Error(`Invalid value for type "${r}": ${n} (expected JSON)`)}else if("<String>"===r){if("true"===n||"false"===n||"null"===n)throw new Error(`Invalid value for type "${r}": ${n} (expected string)`)}else if("<Number>"===r){if(isNaN(parseFloat(n))||!isFinite(n))throw new Error(`Invalid value for type "${r}": ${n} (expected number)`)}else if("<Boolean>"===r){if("true"!==n&&"false"!==n)throw new Error(`Invalid value for type "${r}": ${n} (expected boolean)`)}else{if("<Array>"!==r)throw new Error(`Unsupported type: ${r}`);try{let e=JSON.parse(n);if(!Array.isArray(e))throw new Error(`Invalid value for type "${r}": ${n} (expected array)`)}catch(e){throw new Error(`Invalid value for type "${r}": ${n} (expected array)`)}}}t.remove()})),r(e))}))}}))}})),o.querySelectorAll("import").forEach((e=>{let t=e.getAttribute("src");if(!t.endsWith(".html"))throw new Error("Unsupported imported file type!");window[t]?d(window[t],o,i,e):fetch(t).then((e=>e.text())).then((r=>{window[t]=r,d(r,o,i,e)}))}));let l=o.querySelector("export");l&&(l=l.innerHTML.replace(/\s/g,""),l=l.split(","),l=l.filter(Boolean),l.forEach((async r=>{let l=o.querySelector(r);if([].forEach((e=>{if(l.hasAttribute(e)&&"typeof"===e){let t=a.find((t=>t.name===l.getAttribute(e)));if(!t)throw new Error(`Type "${l.getAttribute(e)}" does not exist`);{let e,n=s[t.constraint],o=i.querySelector(r).innerHTML;if("false"===t.isStrict)return;if(n===Number){if(e=Number(o),e=isNaN(e)?0:e,0===e)throw new Error(`Invalid value for type "${t.name}": ${o} (expected number)`)}else if(n===Boolean)if("true"===o.toLowerCase())e=!0;else{if("false"!==o.toLowerCase())throw new Error(`Invalid value for type "${t.name}": ${o} (expected boolean)`);e=!1}else{if(n!==String)throw new Error(`Invalid constraint type for type "${t.name}": ${t.constraint}`);e=o}}}})),o.querySelectorAll("[state]").forEach((e=>{let t=e.getAttribute("state");e.id=t,null!=y(t)&&null!=y(t)||h(t,""),e.innerHTML=e.innerHTML+y(t),setTimeout((()=>{f(t,(r=>{setTimeout((()=>{"INPUT"!=e.tagName&&"TEXTAREA"!=e.tagName||(e.value=r),"SELECT"==e.tagName&&(e.value=r),"IMG"==e.tagName&&(e.src=r),"A"==e.tagName&&(e.href=r),"IFRAME"==e.tagName&&(e.src=r),"VIDEO"==e.tagName&&(e.src=r),"AUDIO"==e.tagName&&(e.src=r),"EMBED"==e.tagName&&(e.src=r),"OBJECT"==e.tagName&&(e.src=r),"SOURCE"==e.tagName&&(e.src=r),"TRACK"==e.tagName?e.src=r:e.innerHTML=r,document.querySelector(`#${t}`).innerHTML=r}),0)}))}),0)})),window.rerender=u,o.querySelector(r).hasAttribute("props")){o.querySelector(r);let e=o.querySelector(r).getAttribute("props").split(":");e.forEach((t=>{if(c[r]=e,sessionStorage.setItem("$dox-props",JSON.stringify(c)),l.querySelectorAll("[derive]").forEach((e=>{let t=e.getAttribute("derive"),n=i.querySelector(r).getAttribute(t);e.innerHTML.includes(`{{${t}}}`)&&(e.innerHTML=e.innerHTML.replace(`{{${t}}}`,n))})),"children"==t){if(o.querySelector(r).querySelector("slot")&&o.querySelector(r).innerHTML.includes("{{children}}")){let e=o.querySelector(r).querySelector("slot").innerHTML;o.querySelector(r).innerHTML=o.querySelector(r).innerHTML.replace("{{children}}",e)}}else i.querySelector(r).getAttribute(t)&&(o.querySelector(r).innerHTML=o.querySelector(r).innerHTML.replace(`{{${t}}}`,i.querySelector(r).getAttribute(t)))})),o.querySelectorAll("[props]").forEach((e=>{e.getAttribute("props").split(":").forEach((t=>{if(e.hasAttribute("typeof")){let r=e.getAttribute("typeof").split("{{:")[1].split("}}")[0],n=e.getAttribute(t);if("<Json>"===r)try{JSON.parse(n)}catch(e){throw new Error(`Invalid value for type "${r}": ${n} (expected JSON)`)}else if("<String>"===r){if("true"===n||"false"===n||"null"===n)throw new Error(`Invalid value for type "${r}": ${n} (expected string)`)}else if("<Number>"===r){if(isNaN(parseFloat(n))||!isFinite(n))throw new Error(`Invalid value for type "${r}": ${n} (expected number)`)}else if("<Boolean>"===r){if("true"!==n&&"false"!==n)throw new Error(`Invalid value for type "${r}": ${n} (expected boolean)`)}else{if("<Array>"!==r)throw new Error(`Unsupported type: ${r}`);try{let e=JSON.parse(n);if(!Array.isArray(e))throw new Error(`Invalid value for type "${r}": ${n} (expected array)`)}catch(e){throw new Error(`Invalid value for type "${r}": ${n} (expected array)`)}}}}))}))}function u(e){let t=document.querySelector(e);t&&n.forEach((e=>{if(e.element==t){e.html.querySelectorAll("import").forEach((async e=>{let t=e.getAttribute("src");if(!t.endsWith(".html"))throw new Error("Unsupported imported file type!");window[t]?d(window[t],o,document.body,e):fetch(t).then((e=>e.text())).then((async r=>{await setTimeout((()=>{}),0),window[t]=r,d(r,o,document.body,e)}))}))}}))}function p(e){e.inject=t=>(e.innerHTML=t,p(e));let t=sessionStorage.getItem("$dox-props")?JSON.parse(sessionStorage.getItem("$dox-props")):[];return t=t[e.tagName],t&&(e.props=t),e.class=t=>(e.className=t,p(e)),e.add=(t,r)=>{let n=document.createElement(t);return r&&Object.keys(r).forEach((e=>{n.setAttribute(e,r[e])})),e.appendChild(n),p(n)},e.delete=()=>(e.remove(),p(e)),e.parent=()=>p(e.parentNode),e.query=e=>{let t=document.querySelector(e);if(t)return p(t)},e.classes=(t,r)=>("add"==r&&e.classList.add(t),"remove"==r&&e.classList.remove(t),"toggle"==r&&e.classList.toggle(t),p(e)),e.html=t=>t?(e.innerHTML=t,p(e)):e.innerHTML,e.prepend=t=>(e.innerHTML=t+e.innerHTML,p(e)),e.append=t=>(e.innerHTML+=t,p(e)),e.blur=()=>{e.blur()},e.fade=t=>{e.style.transition=`opacity ${t}s`,e.style.opacity=0},e.focus=e.focus,e.queryAll=t=>{let r=e.querySelectorAll(t);return e.forEach=e=>{r.forEach((t=>{e(t)}))},r.forEach((e=>{e=p(e)})),r},e.after=t=>(e.insertAdjacentHTML("afterend",t),p(e)),e.before=t=>(e.insertAdjacentHTML("beforebegin",t),p(e)),e.attr=(t,r)=>r?(e.setAttribute(t,r),p(e)):e.getAttribute(t),e.replace=(t,r)=>{let n=document.createElement(t);return n.innerHTML=r,e.parentNode.replaceChild(n,e),p(n)},e.on=(t,r)=>{e.addEventListener(t,(t=>(Object.defineProperty(t,"target",{value:p(t.target)}),Object.defineProperty(t,"currentTarget",{value:p(t.currentTarget)}),r(t),p(e))))},e.setProp=(t,r)=>{if(r)return o.querySelector(e.tagName).setAttribute(t,r),u(),p(e)},e.css=(t,r)=>r?(e.style[t]=r,p(e)):e.style[t],e.getChildren=()=>{let t=[],r=e=>{let n=e.children;for(let o=0;o<n.length;o++)n[o]=p(n[o]),n[o].parent=e,n[o].index=o,t.push(n[o]),r(n[o])};return e.forEach=r=>(t.forEach((e=>{r(e)})),p(e)),e.map=(r,n)=>(n?t.forEach((e=>{r(e,n)})):t.forEach((e=>{r(e)})),p(e)),r(e),t},e}document.querySelector(r)&&n.push({element:document.querySelector(r),parent:document.querySelector(r).parentNode,template:l.innerHTML,html:o,body:i}),u(),e={route:()=>window.currentRoute,currentRender:()=>t,setProp:(e,t,r)=>{let n=o.querySelector(e);return n&&(n.setAttribute(t,r),u()),p(n)},current:()=>{let e=document.activeElement;if(e)return e.isActive=!0,p(e)},domChange:(e,t=!1,r=(()=>{}))=>{var n=!1;new MutationObserver((function(t){n&&"changed"===e?t.forEach((function(e){r(e)})):r()})).observe(document,{childList:!0,subtree:!0}),setTimeout((()=>{n=!0,t&&r()}),100)},setVar:(e,t)=>{window[e]=t,window.postMessage({type:"setVar",data:{name:e,value:t}},window.location.origin)},add:(e,t)=>{let r=document.createElement(e);return Object.keys(t).forEach((e=>{r.setAttribute(e,t[e])})),r=p(r),p(r)},title:e=>{document.title=e},querySelector:e=>{let t=document.querySelector(e);return t&&(t=p(t)),t},querySelectorAll:e=>{let r=t.querySelectorAll(e)||o.querySelectorAll(e)||i.querySelectorAll(e)||null,n=[];return r.forEach((e=>{n.push(p(e))})),n},html:document.querySelector("html").innerHTML,text:document.querySelector("html").innerText,on:(e,t)=>{window.addEventListener(e,t)},post:(e,t,r,n)=>{"object"==typeof t?(t=JSON.stringify(t),fetch(e,{method:"POST",headers:{"Content-Type":"application/json",headers:n},body:t}).then((e=>"json"==n.responseType?e.json():e.text()))):"string"==typeof t?fetch(e,{method:"POST",headers:{"Content-Type":"text/plain",headers:n},body:t}).then((e=>"json"==n.responseType?e.json():e.text())).then((e=>{r(e)})):JSON.parse(t)&&fetch(e,{method:"POST",headers:{"Content-Type":"application/json",headers:n},body:JSON.stringify(t)}).then((e=>e.json())).then((e=>{r(e)}))},get:(e,t,r)=>{fetch(e,{method:"GET",headers:{"Content-Type":"application/json",headers:r}}).then((e=>e.json())).then((e=>{t(e)}))},put:(e,t,r,n)=>{fetch(e,{method:"PUT",headers:{"Content-Type":"application/json",headers:n},body:JSON.stringify(t)}).then((e=>e.json())).then((e=>{r(e)}))},delete:(e,t,r)=>{fetch(e,{method:"DELETE",headers:{"Content-Type":"application/json",headers:r}}).then((e=>e.json())).then((e=>{t(e)}))},setMeta:(e=null,t=null,r,n=!1,o=!1)=>{if(t){if(o&&(r.includes("https")||r.includes("http")))return void(r+="?a=b");if(document.querySelector(`meta[property="${t}"]`))return document.querySelector(`meta[property="${t}"]`).setAttribute("content",r),void(n&&document.querySelector(`meta[property="${t}"]`).setAttribute(n,r));{let i=document.createElement("meta");if(o&&(r.includes("https")||r.includes("http")))return void(r+="?a=b");n&&Object.keys(n).forEach((e=>{cosole.log(e),i.setAttribute(e,n[e])})),i.setAttribute("property",t),i.setAttribute("content",r),e&&i.setAttribute("name",e),document.querySelector("head").appendChild(i)}}else if(e){let t=document.createElement("meta");t.setAttribute("name",e),t.setAttribute("content",r),n&&Object.keys(n).forEach((e=>{t.setAttribute(e,n[e])})),document.querySelector("head").appendChild(t)}}}}))),o.querySelectorAll("var").forEach((e=>{if(e.hasAttribute("typeof")){let t=e.getAttribute("typeof").split("{{:")[1].split("}}")[0],r=e.innerHTML;if("<Json>"===t)try{JSON.parse(r)}catch(e){throw new Error(`Invalid value for type "${t}": ${r} (expected JSON)`)}else if("<String>"===t){if("true"===r||"false"===r||"null"===r)throw new Error(`Invalid value for type "${t}": ${r} (expected string)`)}else if("<Number>"===t){if(isNaN(parseFloat(r))||!isFinite(r))throw new Error(`Invalid value for type "${t}": ${r} (expected number)`)}else if("<Boolean>"===t){if("true"!==r&&"false"!==r)throw new Error(`Invalid value for type "${t}": ${r} (expected boolean)`)}else{if("<Array>"!==t)throw new Error(`Unsupported type: ${t}`);try{let e=JSON.parse(r);if(!Array.isArray(e))throw new Error(`Invalid value for type "${t}": ${r} (expected array)`)}catch(e){throw new Error(`Invalid value for type "${t}": ${r} (expected array)`)}}}}))};async function d(e,t,r,n){let o=new DOMParser,i=await o.parseFromString(e,"text/html").body,l={};if(i.querySelectorAll("var").forEach((e=>{e.style.display="none";let t=e.getAttribute("name"),r=e.innerHTML;window[t]=r,i.innerHTML=i.innerHTML.replace(`{{${t}}}`,r),e.remove()})),i.querySelector("if")){let e=i.querySelector("if"),r=e.getAttribute("prop")?e.getAttribute("prop"):null,n=e.getAttribute("is"),o=(e.getAttribute("else"),e.parentNode),l=e.getAttribute("props")?e.getAttribute("props").split(","):null,a=t.querySelector(o.tagName);r&&l&&l.forEach((t=>{if(a.getAttribute(r)==n){let t=e.innerHTML;if(t.includes("{{")){let e=t.split("{{")[1].split("}}")[0];parsedjs(e,o)}}}))}i.querySelectorAll("var").forEach((e=>{e.style.display="none";let r=e.getAttribute("name"),n=e.innerHTML;if(window[r]=n,t.querySelectorAll("*").forEach((e=>{let t=e.innerHTML.match(/{{(.*?)}}/g);t&&e.innerHTML.includes(`{{${r}}}`)&&t.forEach((t=>{e.innerHTML=e.innerHTML.replace(t,n)}))})),e.hasAttribute("typeof")){let t=e.getAttribute("typeof").split("{{:")[1].split("}}")[0],r=n;if("<Json>"===t)try{JSON.parse(r)}catch(e){throw new Error(`Invalid value for type "${t}": ${r} (expected JSON)`)}else if("<String>"===t){if("true"===r||"false"===r||"null"===r)throw new Error(`Invalid value for type "${t}": ${r} (expected string)`)}else if("<Number>"===t){if(isNaN(parseFloat(r))||!isFinite(r))throw new Error(`Invalid value for type "${t}": ${r} (expected number)`)}else if("<Boolean>"===t){if("true"!==r&&"false"!==r)throw new Error(`Invalid value for type "${t}": ${r} (expected boolean)`)}else{if("<Array>"!==t)throw new Error(`Unsupported type: ${t}`);try{let e=JSON.parse(r);if(!Array.isArray(e))throw new Error(`Invalid value for type "${t}": ${r} (expected array)`)}catch(e){throw new Error(`Invalid value for type "${t}": ${r} (expected array)`)}}}e.remove()}));let a=[];if(i.querySelectorAll("[props]").forEach((async e=>{let r=e.tagName;if(t.querySelector(r)){let n=e.getAttribute("props").split(":");n.forEach((async e=>{if(l[r]=n,sessionStorage.setItem("$dox-props",JSON.stringify(l)),"children"==e)t.querySelector(r).querySelector("slot")&&i.querySelector(r).innerHTML.includes("{{children}}")&&(a.length>0&&a.forEach((e=>{e.parent==i.querySelector(r).parentNode&&(i.querySelector(r).innerHTML=e.template)})),a.push({element:i.querySelector(r),template:i.querySelector(r).innerHTML,parent:i.querySelector(r).parentNode?i.querySelector(r).parentNode:null}),i.querySelector(r).innerHTML=i.querySelector(r).innerHTML.replace("{{children}}",t.querySelector(r).querySelector("slot").innerHTML));else if(t.querySelector(r).getAttribute(e)&&(a.length>0&&a.forEach((n=>{i.querySelector(r).innerHTML.includes(`{{${e}}}`)&&(i.querySelector(r).innerHTML=i.querySelector(r).innerHTML.replace(`{{${e}}}`,t.querySelector(r).getAttribute(e)))})),i.querySelector(r).innerHTML.includes(`{{${e}}}`))){a.push({element:i.querySelector(r),template:i.querySelector(r).innerHTML,parent:i.querySelector(r).parentNode?i.querySelector(r).parentNode:null});let n=t.querySelector(r).getAttribute(e);i.querySelector(r).innerHTML=i.querySelector(r).innerHTML.replace(`{{${e}}}`,n)}}))}})),i.querySelectorAll("*").forEach((e=>{Object.values(e.attributes).forEach((t=>{let r=t.value;if(r.includes("{{")){let n=r.match(/{{(.*?)}}/g);n&&(n.forEach((t=>{let n=t.replace("{{","").replace("}}",""),o=e.parentNode.getAttribute(n),i=document.querySelector(e.parentNode.tagName);i&&i.getAttribute(n)&&(o=i.getAttribute(n)),r=r.replace(new RegExp(`{{${n}}}`,"g"),o)})),e.setAttribute(t.name,r))}}));let r=e.innerHTML.match(/{{(.*?)}}/g);if(r&&r.forEach((r=>{let n=r.split("{{")[1].split("}}")[0],o=i.querySelector(e.tagName).parentNode.tagName;t.querySelectorAll("*").forEach((t=>{if(t.tagName==o){let r=t.getAttribute(n);if(r){"true"==r.toString().toLowerCase()&&(r=r.toString().toLowerCase());let t=e.innerHTML.replace(new RegExp(`{{${n}}}`,"g"),r);e.innerHTML=t}}}))})),e.hasAttribute("state")){let t=e.getAttribute("state");e.innerHTML=e.innerHTML+y(t),document.querySelector(e.tagName)&&(document.querySelector(e.tagName).innerHTML=e.innerHTML),f(t,(t=>{document.querySelector(e.tagName)&&(document.querySelector(e.tagName).innerHTML=t)}))}})),n.getAttribute("exports")){n.getAttribute("exports").split(",").forEach((async e=>{let r=i.querySelector(e)?i.querySelector(e):t.querySelector(e);var n;(await(n=e,new Promise((e=>{if(document.querySelector(n))return e(document.querySelector(n));const t=new MutationObserver((r=>{document.querySelector(n)&&(e(document.querySelector(n)),t.disconnect())}));t.observe(document.body,{childList:!0,subtree:!0})})))).innerHTML=r.innerHTML}))}}window.Router=class{constructor(e){this.routes=e||{},this.currentRoute="",window.addEventListener("hashchange",(()=>{this.route(),rerender()})),window.addEventListener("DOMContentLoaded",(()=>{this.route()})),this.fallbackRoute="",this.errorOn=!1}route(){const e=window.location.hash.slice(1);this.currentRoute=e,this.navigate()}render(t){n.forEach((r=>{let n=r.parent,o=r.template,i=r.element;if(n.getAttribute("route")===t){i.innerHTML="",window.dox=e,document.title=n.getAttribute("title"),window.rerender(i.tagName),window.currentRender=i;let t=(new DOMParser).parseFromString(o,"text/html");t.body.innerHTML=t.body.innerHTML.replace(/{{(.*?)}}}/gs,""),i.innerHTML=t.body.innerHTML}else i.innerHTML=""}))}navigate(){let e=!1;this.routes&&Object.keys(this.routes).forEach((async t=>{const{isMatch:r,params:n,query:o,asterisk:i}=this.isRouteMatch(this.currentRoute,t);if(r){if(e=!0,Object.keys(o).length>0&&window.location.hash.includes("?")){t=window.location.hash.split("?")[0].replace("#","");const e=this.routes[t];return this.render(t),await setTimeout((()=>{}),2),e({params:n,query:o}),void(window.dox=window.dox||{})}if(Object.keys(n).length>0&&!window.location.hash.includes("?")){const e=this.routes[t],r=t.split("/:")[0];return this.render(r),await setTimeout((()=>{}),2),e({params:n,query:o}),void(window.dox=window.dox||{})}if(i){const e=this.routes[t],r=t.split("/*")[0];return this.render(r),await setTimeout((()=>{}),2),e({asterisk:i}),void(window.dox=window.dox||{})}{const e=this.routes[t];return this.render(t),await setTimeout((()=>{}),2),e({params:n,query:o}),void(window.dox=window.dox||{})}}this.render("404")})),!e&&this.fallbackRoute&&(window.location.hash="#"+this.fallbackRoute)}isRouteMatch(e,t){const r=e.split("/").filter((e=>""!==e)),n=t.split("/").filter((e=>""!==e));if(r.length!==n.length&&!t.includes("*"))return{isMatch:!1};const o={};let i={},l="";for(let e=0;e<n.length;e++){const t=r[e],a=n[e];if(a.startsWith(":")){const e=t;o[a.slice(1)]=e}else if(a.includes("?")){const e=a.split("?")[1];i=this.extractQuery(e)}else{if(a.includes("*")){l=r.slice(e).join("/");break}if(t!==a)return{isMatch:!1}}}return{isMatch:!0,params:o,query:i,asterisk:l}}get(e,t){this.routes[e]=t}redirect(e){window.location.hash="#"+e}extractParams(e,t){const r=e.split("/").filter((e=>""!==e)),n=t.split("/").filter((e=>""!==e)),o={};for(let e=0;e<n.length;e++){const t=n[e];if(t.startsWith(":")){const n=t.slice(1),i=r[e];o[n]=i}}return o}extractQuery(e){const t=e.indexOf("?");if(-1!==t){const r=e.slice(t+1).split("&"),n={};return r.forEach((e=>{const[t,r]=e.split("=");n[t]=decodeURIComponent(r)})),n}return{}}extractAsterics(e){const t=e.indexOf("*");if(-1!==t){const r=e.slice(t+1).split("&"),n={};return r.forEach((e=>{const[t,r]=e.split("=");n[t]=decodeURIComponent(r)})),n}}},window.dox=e;const p={},h=(e,t)=>{p[e]=t,window.postMessage({name:e,value:t},"*")},y=e=>p[e];window.addEventListener("message",(e=>{if(e.origin!==window.location.origin)return;const{name:t,value:r}=e.data;p[t]=r}));const f=(e,t=(()=>{}))=>{window.addEventListener("message",(r=>{if(r.origin!==window.location.origin)return;const{name:n,value:o}=r.data;n===e&&t(o)}))};window.effect=f,window.getState=y,window.setState=h,window.dox=e;
+let dox;
+let currentRender;
+let templates = [];
+let importsTag = document.querySelector('imports')   
+let importmeta = document.querySelector('[imports]')
+// remove whitespace
+let imports;
+if(importmeta){
+  imports = importmeta.getAttribute('imports').replace(/\s/g, '')
+}else if(importsTag){
+    throw new Error('<imports> is deprecated use <meta imports="/someimport,/someimport"> instead! read latest git release for more info: https://github.com/MalikWhitten67/html-dox/releases/latest')
+}
+ 
+imports = imports.split(',')
+// remove empty strings
+imports = imports.filter(Boolean)
+
+let cache = {}
+ 
+let types = []
+// constraint types - for type checking
+
+let contraintTypes = {
+    'dox:string': String,
+    'dox:number': Number,
+    'dox:boolean': Boolean,
+    'dox:array': Array,
+    'dox:object': Object,
+    'dox:undefined': undefined,
+    'dox:null': null,
+    'dox:function': Function,
+    'dox:regexp': RegExp,
+    'dox:date': Date,
+}
+// import checking // import file if type is valid
+let variables = []
+let props = sessionStorage.getItem('$dox-props') ? JSON.parse(sessionStorage.getItem('$dox-props')) : {}
+
+
+
+
+ 
+
+imports.map((item) => {
+    if (!item.endsWith('.html') && !item.endsWith('.css') && !item.endsWith('.js')) {
+        throw new Error('Unsupported imported file type!');
+    }
+    else if (item.endsWith('.js')) {
+        let preload = document.createElement('link');
+        preload.setAttribute('rel', 'preload');
+        preload.setAttribute('href', item);
+        preload.type = 'text/javascript';
+        preload.setAttribute('as', 'script');
+        document.querySelector('head').appendChild(preload);
+
+        if (!cache[item]) {
+            fetch(item)
+                .then((response) => {
+                    return response.text();
+                })
+                .then((data) => {
+
+                    if (data.includes('document') && !item.includes('tailwind.js')) {
+                        throw new Error('Imported JS file cannot contain document. Use dox instead.');
+                    } else if ((data.includes('innerHTML') || data.includes('innerText')) && !item.endsWith('tailwind.js')) {
+                        throw new Error('Use dox:text to return text and dox:$ to return HTML.');
+                    }
+                    let pscript = document.createElement('script')
+
+                            pscript.id = 'dox-script'
+
+                            pscript.type = 'module'
+                            pscript.innerHTML = data
+                            document.head.appendChild(pscript)
+ 
+                             
+
+                  
+
+
+
+                });
+        } else {
+            (() => {
+                cache[item]
+            })()
+
+        }
+    }
+    if (item.endsWith('.html')) {
+        let preload = document.createElement('link');
+        preload.setAttribute('rel', 'preload');
+        preload.setAttribute('href', item);
+        preload.type = 'text/html';
+        preload.setAttribute('as', 'document');
+        document.querySelector('head').appendChild(preload);
+
+        if (cache[item]) {
+            parser(cache[item]);
+        } else {
+            fetch(item)
+                .then((response) => {
+                    return response.text();
+                })
+                .then(async (data) => {
+                    cache[item] = data;
+                    await parser(data);
+                });
+        }
+    }
+});
+
+const parser = async (data) => {
+    let dom = new DOMParser();
+    let html = dom.parseFromString(data, 'text/html');
+    html = html.body
+    let body = document.body
+    let _vars = html.querySelectorAll('var');
+
+    _vars.forEach((item) => {
+
+      
+          
+        let varName = item.getAttribute('name');
+        let varValue = item.innerHTML;
+        if(item.innerHTML.length  > 0){
+            window[varName] = varValue;
+          
+        }else{
+            window[varName] = ''
+        }
+       
+        
+       
+        html.innerHTML = html.innerHTML.replace(`{{${varName}}}`, varValue);
+        item.remove();
+        return;
+    })
+    html.querySelectorAll('*').forEach(async (element) => {
+        if (element.innerHTML.includes('{{')) {
+          let matchesWithNewlines = element.innerHTML.match(/{{(.*?)}}/gs);
+          if (matchesWithNewlines) {
+            matchesWithNewlines.forEach(async (match) => {
+              let data = match.split('{{')[1].split('}}}')[0].trim();
+              if (data.startsWith('map(') && data.endsWith('}}')) {
+                match = match.replace('&gt;', '>');
+                let json = data.split('map(')[1].split(')')[0];
+      
+                let returnMethod = match.split('return(')[1].split('){')[0].trim();
+                let returnHTML = match.split('){')[1].trim().split('}}')[0].trim();
+                returnHTML = returnHTML.replace(/json\./g, '');
+      
+                let parentElement = document.createElement('div');
+      
+                async function setData(e) {
+                  let name;
+                  let value;
+                  if (e && e.data && e.data.name == json) {
+                    parentElement.innerHTML = '';
+                    name = e.data.name;
+                    value = e.data.value;
+                    parsed = JSON.parse(JSON.stringify(window[name]));
+      
+                    let elements = [];
+                    let func;
+                    let modifiedData;
+                    if (returnMethod.length > 0) {
+                      func = new Function('json', `return ${json}.${returnMethod}`);
+                      modifiedData = func(parsed);
+                    } else {
+                      modifiedData = parsed;
+                    }
+      
+                    modifiedData.forEach((item) => {
+                      let divElement;
+                      let embeddedHTML = returnHTML;
+      
+                      Object.entries(item).forEach(([key, value]) => {
+                        embeddedHTML = embeddedHTML.replace(new RegExp(`{${key}}`, 'g'), value);
+                      });
+      
+                      divElement = embeddedHTML;
+                      parentElement.innerHTML = parentElement.innerHTML + divElement;
+                    });
+      
+                    function waitForElm(selector) {
+                      return new Promise((resolve) => {
+                        if (document.querySelector(selector)) {
+                          return resolve(document.querySelector(selector));
+                        }
+      
+                        const observer = new MutationObserver((mutations) => {
+                          if (document.querySelector(selector)) {
+                            resolve(document.querySelector(selector));
+                            observer.disconnect();
+                          }
+                        });
+      
+                        observer.observe(document.body, {
+                          childList: true,
+                          subtree: true,
+                        });
+                      });
+                    }
+      
+                    let elm = await waitForElm(`[map="${json}"]`);
+      
+                    if (elm) {
+                      let container = document.createElement('div');
+                      container.innerHTML = parentElement.innerHTML;
+                      container.setAttribute('container-map', json);
+      
+                      if (!elm.querySelector(`[container-map="${json}"]`)) {
+                        elm.appendChild(container);
+                      } else {
+                        elm.querySelector(`[container-map="${json}"]`).innerHTML = parentElement.innerHTML;
+                      }
+                    }
+      
+                     
+                    if(html.innerHTML.includes('{{')){
+                        html.innerHTML = html.innerHTML.replace(/{{(.*?)}}/gs, '');
+                      }
+                  } else if (window[json]) {
+                    parentElement.innerHTML = '';
+      
+                    let parsed = JSON.parse(window[json]);
+      
+                    let elements = [];
+                    let func;
+                    let modifiedData;
+                    if (returnMethod.length > 0) {
+                      func = new Function('json', `return ${json}.${returnMethod}`);
+                      modifiedData = func(parsed);
+                    } else {
+                      modifiedData = parsed;
+                    }
+      
+                    modifiedData.forEach((item) => {
+                      let divElement;
+                      let embeddedHTML = returnHTML;
+      
+                      Object.entries(item).forEach(([key, value]) => {
+                        embeddedHTML = embeddedHTML.replace(new RegExp(`{${key}}`, 'g'), value);
+                      });
+      
+                      divElement = embeddedHTML;
+                      parentElement.innerHTML = parentElement.innerHTML + divElement;
+                    });
+      
+                    function waitForElm(selector) {
+                      return new Promise((resolve) => {
+                        if (document.querySelector(selector)) {
+                          return resolve(document.querySelector(selector));
+                        }
+      
+                        const observer = new MutationObserver((mutations) => {
+                          if (document.querySelector(selector)) {
+                            resolve(document.querySelector(selector));
+                            observer.disconnect();
+                          }
+                        });
+      
+                        observer.observe(document.body, {
+                          childList: true,
+                          subtree: true,
+                        });
+                      });
+                    }
+      
+                    let elm = await waitForElm(`[map="${json}"]`);
+      
+                    
+                    if (elm) {
+                      if (elm.innerHTML.length == 0) {
+                        elm.innerHTML = parentElement.innerHTML;
+                      } else if (elm.innerHTML.length > 0) {
+                        if (!elm.querySelector(`[container-map="${json}"]`)) {
+                          let container = document.createElement('div');
+                          container.innerHTML = parentElement.innerHTML;
+                          container.setAttribute('container-map', json);
+                          elm.appendChild(container);
+                        } else {
+                          elm.querySelector(`[container-map="${json}"]`).innerHTML = parentElement.innerHTML;
+                        }
+                      }
+                    }
+                    
+                      
+                  }
+                }
+      
+                setData();
+      
+                window.addEventListener('message', (e) => {
+                  if (e.origin == window.location.origin && e.data.type == 'setVar') {
+                    
+                    html.querySelectorAll('var').forEach((item) => {
+                        
+                      
+                        if (item.hasAttribute('typeof')) {
+                          let type = item.getAttribute('typeof').split('{{:')[1].split('}}')[0];
+                          let value =  e.data.data.value;
+                      
+                          if (type === '<Json>') {
+                            try {
+                              let parsedValue = JSON.parse(value);
+                               
+                            } catch (error) {
+                              throw new Error(`Invalid value for type "${type}": ${value} (expected JSON)`);
+                            }
+                          } else if (type === '<String>') {
+                            if (value === 'true' || value === 'false' || value === 'null') {
+                              throw new Error(`Invalid value for type "${type}": ${value} (expected string)`);
+                            }
+                          } else if (type === '<Number>') {
+                            if (isNaN(parseFloat(value)) || !isFinite(value)) {
+                              throw new Error(`Invalid value for type "${type}": ${value} (expected number)`);
+                            }
+                          } else if (type === '<Boolean>') {
+                            if (value !== 'true' && value !== 'false') {
+                              throw new Error(`Invalid value for type "${type}": ${value} (expected boolean)`);
+                            }
+                          } else if (type === '<Array>') {
+                            try {
+                              let parsedValue = JSON.parse(value);
+                              if (!Array.isArray(parsedValue)) {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+                              }
+                            } catch (error) {
+                              throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+                            }
+                          } else {
+                            throw new Error(`Unsupported type: ${type}`);
+                          }
+                        }
+                      
+                        item.remove();
+                      });
+                      
+                 
+                                        
+                      
+                    setData(e);
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+      
+
+    let imports = html.querySelectorAll('import');
+
+    imports.forEach((item) => {
+
+        let file = item.getAttribute('src');
+
+        if (!file.endsWith('.html')) {
+            throw new Error('Unsupported imported file type!');
+        }
+
+        if (!window[file]) {
+
+            fetch(file)
+                .then((response) => {
+                    return response.text();
+                })
+                .then((data) => {
+
+
+                    window[file] = data
+                    setData(data, html, body, item)
+
+                });
+        } else {
+            setData(window[file], html, body, item)
+        }
+
+    });
+    
+      
+      
+     
+      
+
+  
+
+    let _export = html.querySelector('export');
+     
+  
+    if (_export) {
+        _export = _export.innerHTML.replace(/\s/g, '');
+        _export = _export.split(',');
+        _export = _export.filter(Boolean);
+
+
+
+
+        _export.forEach(async (item) => {
+
+
+            let template = html.querySelector(item);
+
+
+
+
+            let attributes = [];
+
+
+
+            attributes.forEach((attribute) => {
+                if (template.hasAttribute(attribute)) {
+                    if (attribute === 'typeof') {
+
+                        let type = types.find((type) => type.name === template.getAttribute(attribute));
+
+                        if (type) {
+                            let constraintType = contraintTypes[type.constraint];
+                            let value = body.querySelector(item).innerHTML;
+                            let convertedValue;
+
+                            if (type.isStrict === 'false') {
+                                return;
+                            }
+
+                            if (constraintType === Number) {
+                                convertedValue = Number(value);
+                                convertedValue = isNaN(convertedValue) ? 0 : convertedValue;
+                                if (convertedValue === 0) {
+                                    throw new Error(`Invalid value for type "${type.name}": ${value} (expected number)`);
+                                }
+                            } else if (constraintType === Boolean) {
+                                if (value.toLowerCase() === 'true') {
+                                    convertedValue = true;
+                                } else if (value.toLowerCase() === 'false') {
+                                    convertedValue = false;
+                                } else {
+                                    throw new Error(`Invalid value for type "${type.name}": ${value} (expected boolean)`);
+                                }
+                            } else if (constraintType === String) {
+                                convertedValue = value;
+                            } else {
+                                throw new Error(`Invalid constraint type for type "${type.name}": ${type.constraint}`);
+                            }
+                        } else {
+                            throw new Error(`Type "${template.getAttribute(attribute)}" does not exist`);
+                        }
+                    }
+                }
+            });
+
+ 
+
+            html.querySelectorAll('[state]').forEach((element) => {
+                let state = element.getAttribute('state')
+
+                element.id = state
+                if (getState(state) == undefined || getState(state) == null) {
+                    setState(state, '')
+                }
+                element.innerHTML = element.innerHTML + getState(state)
+
+                setTimeout(() => {
+                    effect((state), (statev) => {
+
+                        setTimeout(() => {
+                            if (element.tagName == 'INPUT' || element.tagName == 'TEXTAREA') element.value = statev;
+                            if (element.tagName == 'SELECT') element.value = statev;
+                            if (element.tagName == 'IMG') element.src = statev;
+                            if (element.tagName == 'A') element.href = statev;
+                            if (element.tagName == 'IFRAME') element.src = statev;
+                            if (element.tagName == 'VIDEO') element.src = statev;
+                            if (element.tagName == 'AUDIO') element.src = statev;
+                            if (element.tagName == 'EMBED') element.src = statev;
+                            if (element.tagName == 'OBJECT') element.src = statev;
+                            if (element.tagName == 'SOURCE') element.src = statev;
+                            if (element.tagName == 'TRACK') element.src = statev;
+                            else element.innerHTML = statev;
+                            document.querySelector(`#${state}`).innerHTML = statev
+                        }, 0)
+                    })
+                }, 0)
+            })
+
+
+            window.rerender = rerender
+
+
+            if (html.querySelector(item).hasAttribute('props')) {
+                let el = html.querySelector(item)
+                 
+                let $props = html.querySelector(item).getAttribute('props').split(':');
+
+
+                $props.forEach((prop) => {
+ 
+ 
+                    
+                    props[item] = $props
+                    sessionStorage.setItem('$dox-props', JSON.stringify(props))
+
+                    let derivatives = template.querySelectorAll('[derive]');
+                    derivatives.forEach((subitem) => {
+                        let attr = subitem.getAttribute('derive');
+                        let derivedvalue = body.querySelector(item).getAttribute(attr);
+
+                        if (subitem.innerHTML.includes(`{{${attr}}}`)) {
+                            subitem.innerHTML = subitem.innerHTML.replace(`{{${attr}}}`, derivedvalue);
+                        }
+                    });
+ 
+                    if (prop == 'children') {
+                        if (html.querySelector(item).querySelector('slot')) {
+                            if (html.querySelector(item).innerHTML.includes('{{children}}')) {
+                                let value = html.querySelector(item).querySelector('slot').innerHTML;
+                                html.querySelector(item).innerHTML = html.querySelector(item).innerHTML.replace('{{children}}', value);
+                            }
+                        }
+                    }
+                    else {
+                        
+                        if (body.querySelector(item).getAttribute(prop)) {
+                             
+                          html.querySelector(item).innerHTML = html.querySelector(item).innerHTML.replace(`{{${prop}}}`, body.querySelector(item).getAttribute(prop));
+                        }
+                    }
+
+                });
+
+                html.querySelectorAll('[props]').forEach((item) => {
+                    
+                     
+                  
+                    let props = item.getAttribute('props').split(':');
+                    props.forEach((prop) => {
+                        if (item.hasAttribute('typeof')) {
+                            let type = item.getAttribute('typeof').split('{{:')[1].split('}}')[0];
+                            let value = item.getAttribute(prop);
+                        
+                            if (type === '<Json>') {
+                              try {
+                                let parsedValue = JSON.parse(value);
+                               
+                              } catch (error) {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected JSON)`);
+                              }
+                            } else if (type === '<String>') {
+                              if (value === 'true' || value === 'false' || value === 'null') {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected string)`);
+                              }
+                            } else if (type === '<Number>') {
+                              if (isNaN(parseFloat(value)) || !isFinite(value)) {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected number)`);
+                              }
+                            } else if (type === '<Boolean>') {
+                              if (value !== 'true' && value !== 'false') {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected boolean)`);
+                              }
+                            } else if (type === '<Array>') {
+                              try {
+                                let parsedValue = JSON.parse(value);
+                                if (!Array.isArray(parsedValue)) {
+                                  throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+                                }
+                              } catch (error) {
+                                throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+                              }
+                            } else {
+                              throw new Error(`Unsupported type: ${type}`);
+                            }
+                          }
+                    })
+                   
+                  
+                   
+                  });
+                  
+                  
+                  
+            }
+
+         
+              if(document.querySelector(item)){
+                    
+
+      
+
+
+        templates.push({
+            element: document.querySelector(item),
+            parent: document.querySelector(item).parentNode,
+            template: template.innerHTML,
+            html:  html,
+            body: body
+        });
+    } 
+                
+                function rerender(ele) {
+ 
+       
+                    let element = document.querySelector(ele)
+                     
+                    if (element) {
+    
+                        templates.forEach((item) => {
+                            if(item.element == element){
+                                let modules =  item.html.querySelectorAll('import')
+                                
+          
+                         
+    
+                        modules.forEach(async (item) => {
+                            let file = item.getAttribute('src');
+    
+                            if (!file.endsWith('.html')) {
+                                throw new Error('Unsupported imported file type!');
+                            }
+    
+                            if (!window[file]) {
+    
+    
+                                fetch(file)
+                                    .then((response) => {
+                                        return response.text();
+                                    })
+                                    .then(async (data) => {
+    
+                                        await setTimeout(() => {}, 0)
+                                        window[file] = data
+                                        setData(data, html, document.body, item)
+                                    })
+                                return;
+    
+                            } else {
+    
+                                
+                                setData(window[file], html, document.body, item)
+                                
+                            }
+    
+                        });
+                            }
+                        })
+                 
+                        
+                    }
+                    
+    
+                }
+                rerender()
+            
+
+            function methods(element) {
+                    
+           
+             
+                element.inject = (code) => {
+                    element.innerHTML = code;
+                    return methods(element);
+                };
+                
+                let props = sessionStorage.getItem('$dox-props') ? JSON.parse(sessionStorage.getItem('$dox-props')) : [];
+                props = props[element.tagName];
+                if (props) {
+                    element.props = props;
+                }
+                element.class = (name) => {
+                    element.className = name;
+                    return methods(element);
+                };
+                element.add = (elementName, options) => {
+                    let newElement = document.createElement(elementName);
+                    if (options) {
+                        Object.keys(options).forEach((key) => {
+                            newElement.setAttribute(key, options[key]);
+                        });
+                    }
+                    element.appendChild(newElement);
+
+                    return methods(newElement);
+                }
+                element.delete = () => {
+                    element.remove()
+                    return methods(element)
+                }
+
+                element.parent = () => {
+
+                    return methods(element.parentNode);
+                };
+                element.query = (target) => {
+
+                    let el = document.querySelector(target);
+
+                    if (el) {
+                        return methods(el);
+                    }
+
+                }
+                element.classes = (name, option) => {
+                    if (option == 'add') element.classList.add(name);
+                    if (option == 'remove') element.classList.remove(name);
+                    if (option == 'toggle') element.classList.toggle(name);
+                    return methods(element);
+                };
+                element.html = (code) => {
+                    if (code) {
+                        element.innerHTML = code;
+                        return methods(element);
+                    } else {
+                        return element.innerHTML
+
+                    }
+                }
+
+                element.prepend = (code) => {
+                    element.innerHTML = code + element.innerHTML;
+                    return methods(element);
+                };
+                element.append = (code) => {
+
+                    element.innerHTML += code;
+                    return methods(element);
+                };
+                element.blur = () => {
+                    element.blur();
+                };
+                element.fade = (time) => {
+                    element.style.transition = `opacity ${time}s`;
+                    element.style.opacity = 0;
+                }
+                element.focus = element.focus;
+                element.queryAll = (target) => {
+                    let targets = element.querySelectorAll(target);
+                    element.forEach = (callback) => {
+                        targets.forEach((item) => {
+                            callback(item);
+                        });
+                    };
+                    targets.forEach((item) => {
+                        let el = methods(item);
+                        item = el;
+                    });
+                    return targets;
+                };
+
+                element.after = (code) => {
+                    element.insertAdjacentHTML('afterend', code);
+                    return methods(element);
+                };
+                element.before = (code) => {
+                    element.insertAdjacentHTML('beforebegin', code);
+                    return methods(element);
+                };
+                element.attr = (name, value) => {
+                    if (value) {
+                        element.setAttribute(name, value);
+                        return methods(element);
+                    } else {
+                        return element.getAttribute(name);
+                    }
+                };
+                element.replace = (elementName, code) => {
+                    let newElement = document.createElement(elementName);
+                    newElement.innerHTML = code;
+                    element.parentNode.replaceChild(newElement, element);
+                    return methods(newElement);
+                };
+                element.on = (event, callback) => {
+                    element.addEventListener(event, (e) => {
+                        Object.defineProperty(e, 'target', {
+                            value: methods(e.target),
+                        });
+                        Object.defineProperty(e, 'currentTarget', {
+                            value: methods(e.currentTarget),
+                        });
+                        callback(e);
+                        return methods(element);
+                    });
+                };
+                element.setProp = (prop, value) => {
+                    
+                    if(value){
+                        html.querySelector(element.tagName).setAttribute(prop, value)
+                        rerender()
+                        return methods(element)
+                    }
+                }
+                element.css = (prop, value) => {
+                    if (value) {
+                        element.style[prop] = value;
+                        return methods(element);
+                    } else {
+                        return element.style[prop]
+                    }
+                };
+                element.getChildren = () => {
+                    let childs = [];
+                    let traverse = (el) => {
+
+                        let children = el.children;
+                        for (let i = 0; i < children.length; i++) {
+                            children[i] = methods(children[i]);
+                            children[i].parent = el;
+                            children[i].index = i;
+
+
+                            childs.push(children[i]);
+                            traverse(children[i]);
+                        }
+
+
+                    };
+                    element.forEach = (callback) => {
+                        childs.forEach((item) => {
+                            callback(item);
+
+                        });
+                        return methods(element);
+                    };
+                    element.map = (callback, index) => {
+                        if (index) {
+                            childs.forEach((item) => {
+                                callback(item, index);
+                            });
+                        } else {
+                            childs.forEach((item) => {
+                                callback(item);
+                            });
+                        }
+                        return methods(element);
+                    };
+                    traverse(element);
+                    return childs;
+
+                };
+
+
+                return element;
+            }
+
+            dox = {
+                route: () => {
+                    return window.currentRoute
+                },
+                currentRender: () => {
+                    return currentRender
+                },
+                setProp: (element, prop, value) => {
+                   
+                    let el = html.querySelector(element)
+                     
+                    if (el) {
+                        el.setAttribute(prop, value)
+                        rerender()
+                    }
+                    return methods(el)
+                },
+                current: () =>{
+                    // check if this fucntion is inside of a attribute like <button onclick="dox.current()">
+
+                    let element = document.activeElement
+                     
+                    if(element){
+                         element.isActive = true
+                         return methods(element)
+                    }
+                },
+                domChange: (type, eventive = false, callback = () => { }) => {
+
+
+                    var initialRenderCompleted = false;
+
+                    var observer = new MutationObserver(function (mutations) {
+                        if (initialRenderCompleted && type === 'changed') {
+                            mutations.forEach(function (mutation) {
+                                callback(mutation);
+                            });
+                        } else {
+
+                            callback()
+                        }
+                    });
+
+                    observer.observe(document, {
+                        childList: true,
+                        subtree: true
+                    });
+
+                    // only work after initial render
+                    setTimeout(() => {
+                        initialRenderCompleted = true;
+                        if (eventive) {
+                            // base callback if user wants to do something after initial render
+                            callback()
+                        }
+
+
+                    }, 100);
+                },
+
+                setVar: (name, value) => {
+                    window[name] = value;
+                    window.postMessage({
+                        type: 'setVar',
+                        data: {
+                            name: name,
+                            value: value
+                        }
+                    }, window.location.origin);
+                    
+                },
+                add: (element, attributes) => {
+                    let el = document.createElement(element);
+
+
+                    Object.keys(attributes).forEach((item) => {
+                        el.setAttribute(item, attributes[item]);
+                    });
+                    el = methods(el);
+
+                    return methods(el);
+
+                },
+
+                title: (title) => {
+                    document.title = title;
+                },
+
+                querySelector: (selector) => {
+
+                    let el = document.querySelector(selector)
+
+                    if (el) {
+
+                        el = methods(el);
+
+                    }
+                    return el
+
+
+                },
+
+                querySelectorAll: (selector) => {
+
+                    let element = currentRender
+
+                    let els = element.querySelectorAll(selector) || html.querySelectorAll(selector) || body.querySelectorAll(selector) || null;
+                    let elements = [];
+                    els.forEach((item) => {
+                        elements.push(methods(item));
+                    });
+                    return elements;
+
+                },
+                html: document.querySelector('html').innerHTML,
+                text: document.querySelector('html').innerText,
+                on: (event, callback) => {
+
+                    window.addEventListener(event, callback);
+                },
+                post: (url, data, callback, headers) => {
+                    // check if data is object - text or json
+                    if (typeof data === 'object') {
+                        data = JSON.stringify(data);
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                headers
+                            },
+                            body: data,
+                        })
+                            .then((response) => {
+                                if (headers.responseType == 'json') {
+                                    return response.json()
+                                } else {
+                                    return response.text()
+                                }
+                            })
+                    }
+                    else if (typeof data === 'string') {
+
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'text/plain',
+                                headers
+                            },
+                            body: data,
+                        })
+                            .then((response) => {
+                                if (headers.responseType == 'json') {
+                                    return response.json()
+                                } else {
+                                    return response.text()
+                                }
+                            })
+                            .then((data) => {
+                                callback(data);
+                            });
+
+                    } else if (JSON.parse(data)) {
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                headers
+                            },
+                            body: JSON.stringify(data),
+
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                callback(data);
+                            });
+                    }
+
+                },
+                get: (url, callback, headers) => {
+                    fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            headers
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            callback(data);
+                        });
+                },
+                put: (url, data, callback, headers) => {
+                    fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            headers
+                        },
+                        body: JSON.stringify(data),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            callback(data);
+                        });
+                },
+                delete: (url, callback, headers) => {
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            headers
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            callback(data);
+                        });
+                },
+                setMeta: (name = null, property = null, content, other = false, discord = false) => {
+                    if (property) {
+                        if (discord) {
+                            if (content.includes('https') || content.includes('http')) {
+                                content = content + '?a=b'
+                                return
+                            }
+                        }
+                        if (document.querySelector(`meta[property="${property}"]`)) {
+                            document.querySelector(`meta[property="${property}"]`).setAttribute('content', content)
+
+                            if (other) document.querySelector(`meta[property="${property}"]`).setAttribute(other, content);
+                            return
+                        }
+                        else {
+
+                            let meta = document.createElement('meta');
+                            if (discord) {
+                                if (content.includes('https') || content.includes('http')) {
+                                    content = content + '?a=b'
+                                    return
+                                }
+                            }
+                            if (other) {
+
+                                Object.keys(other).forEach((item) => {
+                                    cosole.log(item)
+                                    meta.setAttribute(item, other[item])
+                                })
+                            }
+                            meta.setAttribute('property', property);
+                            meta.setAttribute('content', content);
+                            if (name) meta.setAttribute('name', name);
+                            document.querySelector('head').appendChild(meta);
+                        }
+
+                    }
+                    else if (name) {
+
+                        let meta = document.createElement('meta');
+                        meta.setAttribute('name', name);
+                        meta.setAttribute('content', content);
+                        if (other) {
+
+                            Object.keys(other).forEach((item) => {
+
+                                meta.setAttribute(item, other[item])
+                            })
+                        }
+                        document.querySelector('head').appendChild(meta);
+                    }
+                },
+
+
+
+
+
+
+            }
+
+        });
+
+    }
+
+
+    html.querySelectorAll('var').forEach((item) => {
+         
+        if (item.hasAttribute('typeof')) {
+            let type = item.getAttribute('typeof').split('{{:')[1].split('}}')[0];
+            let value = item.innerHTML;
+             
+        
+            if (type === '<Json>') {
+              try {
+                 JSON.parse(value);
+                 
+              } catch (error) {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected JSON)`);
+              }
+            } else if (type === '<String>') {
+              if (value === 'true' || value === 'false' || value === 'null') {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected string)`);
+              }
+            } else if (type === '<Number>') {
+              if (isNaN(parseFloat(value)) || !isFinite(value)) {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected number)`);
+              }
+            } else if (type === '<Boolean>') {
+              if (value !== 'true' && value !== 'false') {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected boolean)`);
+              }
+            } else if (type === '<Array>') {
+              try {
+                let parsedValue = JSON.parse(value);
+                if (!Array.isArray(parsedValue)) {
+                  throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+                }
+              } catch (error) {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+              }
+            } else {
+              throw new Error(`Unsupported type: ${type}`);
+            }
+          }
+      });
+      
+
+  
+
+
+    
+    
+
+}
+
+
+
+
+
+class Router {
+    constructor(routes) {
+        this.routes = routes || {};
+        this.currentRoute = '';
+
+        // Attach event listeners to handle hash changes and DOMContentLoaded
+        window.addEventListener('hashchange', () => {
+            this.route();
+             rerender()
+        });
+        window.addEventListener('DOMContentLoaded', () => {
+            this.route();
+        });
+
+        this.fallbackRoute = '';
+        this.errorOn = false;
+    }
+
+    route() {
+        const hash = window.location.hash.slice(1); // Remove the "#" character
+        this.currentRoute = hash;
+        this.navigate();
+    }
+
+    render(route) {
+
+        templates.forEach((item) => {
+            let parent = item.parent;
+            let template = item.template;
+            let element = item.element;
+            
+            if (parent.getAttribute('route') ===  route) {
+                element.innerHTML = '';
+                window.dox = dox;
+                document.title = parent.getAttribute('title');
+              
+                window.rerender(element.tagName)
+                 
+                window.currentRender = element;
+                let dom = new DOMParser().parseFromString(template, 'text/html');
+                dom.body.innerHTML = dom.body.innerHTML.replace(/{{(.*?)}}}/gs, '');
+               
+               
+                element.innerHTML =  dom.body.innerHTML;
+               
+            } else {
+                element.innerHTML = '';
+            }
+        });
+
+    }
+
+    navigate() {
+        let matchingRoute = false;
+      
+        if (this.routes) {
+          Object.keys(this.routes).forEach(async (route) => {
+            const { isMatch, params, query, asterisk } = this.isRouteMatch(this.currentRoute, route);
+      
+          
+            if (isMatch) {
+              matchingRoute = true;
+      
+              if (Object.keys(query).length > 0 && window.location.hash.includes('?')) {
+                route = window.location.hash.split('?')[0].replace('#', '');
+                const routeHandler = this.routes[route];
+                this.render(route);
+                await setTimeout(() => {}, 2); // Wait for the DOM to be ready
+                routeHandler({ params, query });
+                window.dox = window.dox || {};
+                return;
+              } else if (Object.keys(params).length > 0 && !window.location.hash.includes('?')) {
+                const routeHandler = this.routes[route];
+                const routeWithoutParams = route.split('/:')[0];
+                // Render the corresponding route
+                this.render(routeWithoutParams);
+      
+                await setTimeout(() => {}, 2); // Wait for the DOM to be ready
+                routeHandler({ params, query });
+      
+                window.dox = window.dox || {};
+      
+                return;
+              } else if (asterisk) {
+               
+                const routeHandler = this.routes[route];
+                const routeWithoutAsterisk =  route.split('/*')[0];
+                this.render(routeWithoutAsterisk);
+      
+                await setTimeout(() => {}, 2); // Wait for the DOM to be ready
+      
+                // Pass the asterisk value as a parameter to the route handler
+                routeHandler({ asterisk });
+      
+                window.dox = window.dox || {};
+      
+                return;
+              } else {
+                const routeHandler = this.routes[route];
+                this.render(route);
+      
+                await setTimeout(() => {}, 2); // Wait for the DOM to be ready
+                routeHandler({ params, query });
+                window.dox = window.dox || {};
+                return;
+              }
+            }else{
+                this.render('404')
+            }
+          });
+        }
+      
+        if (!matchingRoute && this.fallbackRoute) {
+          window.location.hash = '#' + this.fallbackRoute;
+        }
+      }
+
+      isRouteMatch(route, pattern) {
+        const routeSegments = route.split('/').filter((segment) => segment !== '');
+        const patternSegments = pattern.split('/').filter((segment) => segment !== '');
+  
+        if (routeSegments.length !== patternSegments.length && !pattern.includes('*')) {
+          return { isMatch: false };
+        }
+      
+        const params = {};
+        let query = {};
+        let asterisk = '';
+      
+        for (let i = 0; i < patternSegments.length; i++) {
+          const routeSegment = routeSegments[i];
+          const patternSegment = patternSegments[i];
+      
+          if (patternSegment.startsWith(':')) {
+            const paramName = patternSegment.slice(1);
+            const paramValue = routeSegment;
+            params[paramName] = paramValue;
+          } else if (patternSegment.includes('?')) {
+            const patternSegmentsWithQuery = patternSegment.split('?');
+            const queryStr = patternSegmentsWithQuery[1];
+            query = this.extractQuery(queryStr);
+          } else if (patternSegment.includes('*')) {
+            // Capture the remaining path after the asterisk
+            asterisk = routeSegments.slice(i).join('/');
+            break;
+          } else if (routeSegment !== patternSegment) {
+            return { isMatch: false };
+          }
+        }
+      
+        return { isMatch: true, params, query, asterisk };
+      }
+      
+      
+
+    // Rest of the code remains the same
+
+
+ 
+
+
+    get(route, handler) {
+        this.routes[route] = handler;
+    }
+
+    redirect(route) {
+        window.location.hash = '#' + route;
+    }
+
+    extractParams(route, pattern) {
+        const routeSegments = route.split('/').filter((segment) => segment !== '');
+        const patternSegments = pattern.split('/').filter((segment) => segment !== '');
+        const params = {};
+
+        for (let i = 0; i < patternSegments.length; i++) {
+            const patternSegment = patternSegments[i];
+
+            if (patternSegment.startsWith(':')) {
+                const paramName = patternSegment.slice(1);
+                const paramValue = routeSegments[i];
+                params[paramName] = paramValue;
+            }
+        }
+
+        return params;
+    }
+    extractQuery(route) {
+        const queryIndex = route.indexOf('?');
+        if (queryIndex !== -1) {
+            const queryStr = route.slice(queryIndex + 1);
+            const queryPairs = queryStr.split('&');
+            const query = {};
+
+            queryPairs.forEach((pair) => {
+                const [key, value] = pair.split('=');
+                query[key] = decodeURIComponent(value); // Decode URI component to handle special characters
+            });
+
+            return query;
+        }
+
+        return {};
+    }
+    extractAsterics(route) {
+        const queryIndex = route.indexOf('*');
+        // /route/* - returns /route/anything/here/anything/here
+        if (queryIndex !== -1) {
+            const queryStr = route.slice(queryIndex + 1);
+            const queryPairs = queryStr.split('&');
+            const query = {};
+
+            queryPairs.forEach((pair) => {
+                const [key, value] = pair.split('=');
+                query[key] = decodeURIComponent(value); // Decode URI component to handle special characters
+            });
+
+            return query;
+        }
+    }
+
+}
+
+ 
+async function setData(data, html, body, item) {
+   
+ 
+ 
+      let dom = new DOMParser();
+     let dhtml = await dom.parseFromString(data, 'text/html').body
+ 
+      
+      
+     
+      
+
+
+    let props = {};
+
+    dhtml.querySelectorAll('var').forEach((item) => {
+         
+        item.style.display = 'none';
+        let varName = item.getAttribute('name');
+        
+        let varValue = item.innerHTML;
+        window[varName] = varValue;
+        dhtml.innerHTML = dhtml.innerHTML.replace(`{{${varName}}}`, varValue);
+        
+        item.remove();
+        return;
+    });
+    
+    if (dhtml.querySelector('if')) {
+        let el = dhtml.querySelector('if')
+
+        let prop = el.getAttribute('prop') ? el.getAttribute('prop') : null
+        let is = el.getAttribute('is')
+        let elseis = el.getAttribute('else')
+        let elparent = el.parentNode
+        let parentprops = el.getAttribute('props') ? el.getAttribute('props').split(',') : null
+
+        let rendered = html.querySelector(elparent.tagName)
+        if (prop && parentprops) {
+            parentprops.forEach((item) => {
+
+                let propvalue = rendered.getAttribute(prop)
+                if (propvalue == is) {
+                    let template = el.innerHTML
+                    if (template.includes('{{')) {
+                        let value = template.split('{{')[1].split('}}')[0]
+                        parsedjs(value, elparent)
+                    }
+                }
+
+            })
+        }
+
+    }
+    dhtml.querySelectorAll('var').forEach((item) => {
+        item.style.display = 'none';
+        let varName = item.getAttribute('name');
+        let varValue = item.innerHTML;
+        window[varName] = varValue;
+      
+        html.querySelectorAll('*').forEach((element) => {
+          let matches = element.innerHTML.match(/{{(.*?)}}/g);
+          if (matches && element.innerHTML.includes(`{{${varName}}}`)) {
+            matches.forEach((match) => {
+              element.innerHTML = element.innerHTML.replace(match, varValue);
+            });
+          }
+        });
+      
+        if (item.hasAttribute('typeof')) {
+          let type = item.getAttribute('typeof').split('{{:')[1].split('}}')[0];
+          let value = varValue;
+      
+          if (type === '<Json>') {
+            try {
+              let parsedValue = JSON.parse(value);
+              
+            } catch (error) {
+              throw new Error(`Invalid value for type "${type}": ${value} (expected JSON)`);
+            }
+          } else if (type === '<String>') {
+            if (value === 'true' || value === 'false' || value === 'null') {
+              throw new Error(`Invalid value for type "${type}": ${value} (expected string)`);
+            }
+          } else if (type === '<Number>') {
+            if (isNaN(parseFloat(value)) || !isFinite(value)) {
+              throw new Error(`Invalid value for type "${type}": ${value} (expected number)`);
+            }
+          } else if (type === '<Boolean>') {
+            if (value !== 'true' && value !== 'false') {
+              throw new Error(`Invalid value for type "${type}": ${value} (expected boolean)`);
+            }
+          } else if (type === '<Array>') {
+            try {
+              let parsedValue = JSON.parse(value);
+              if (!Array.isArray(parsedValue)) {
+                throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+              }
+            } catch (error) {
+              throw new Error(`Invalid value for type "${type}": ${value} (expected array)`);
+            }
+          } else {
+            throw new Error(`Unsupported type: ${type}`);
+          }
+        }
+      
+        item.remove();
+      });
+      
+      
+ 
+    
+
+  
+    
+    let proptemplates =[]
+    
+    dhtml.querySelectorAll('[props]').forEach(async (item) => {
+         
+        let name = item.tagName;
+        if (html.querySelector(name)) {
+            let $props = item.getAttribute('props').split(':');
+            $props.forEach(async (prop) => {
+                props[name] = $props;
+                sessionStorage.setItem('$dox-props', JSON.stringify(props))
+                 
+                if (prop == 'children') {
+                    
+                    if (html.querySelector(name).querySelector('slot')) {
+                        if (dhtml.querySelector(name).innerHTML.includes('{{children}}')) {
+                            if(proptemplates.length > 0){
+                                proptemplates.forEach((item) => {
+                                   if(item.parent == dhtml.querySelector(name).parentNode){
+                                    dhtml.querySelector(name).innerHTML = item.template
+                                   }
+                                })
+
+                            }
+                            proptemplates.push({
+                                element: dhtml.querySelector(name),
+                                template: dhtml.querySelector(name).innerHTML,
+                                parent: dhtml.querySelector(name).parentNode ? dhtml.querySelector(name).parentNode : null,
+                            })
+                            
+                            
+                            dhtml.querySelector(name).innerHTML = dhtml.querySelector(name).innerHTML.replace(`{{children}}`, html.querySelector(name).querySelector('slot').innerHTML);
+                            
+                           
+                          
+                        }
+                    }
+                }else{
+                    if (html.querySelector(name).getAttribute(prop)) {
+                       
+                        if(proptemplates.length > 0){
+                            proptemplates.forEach((item) => {
+
+                               if(dhtml.querySelector(name).innerHTML.includes(`{{${prop}}}`)){
+                                 dhtml.querySelector(name).innerHTML = dhtml.querySelector(name).innerHTML.replace(`{{${prop}}}`, html.querySelector(name).getAttribute(prop));
+                              
+                               }
+                            })
+
+                        }
+                        if (dhtml.querySelector(name).innerHTML.includes(`{{${prop}}}`)) {
+                            proptemplates.push({
+                                element: dhtml.querySelector(name),
+                                template: dhtml.querySelector(name).innerHTML,
+                                parent: dhtml.querySelector(name).parentNode ? dhtml.querySelector(name).parentNode : null,
+                            })
+                            
+                            let value = html.querySelector(name).getAttribute(prop);
+                            dhtml.querySelector(name).innerHTML = dhtml.querySelector(name).innerHTML.replace(`{{${prop}}}`, value);
+                        }
+                    }
+                }
+            });
+        }
+    });
+    dhtml.querySelectorAll('*').forEach((element) => {
+
+
+
+
+        let attributes = Object.values(element.attributes);
+
+
+        attributes.forEach((attr) => {
+
+            let attrValue = attr.value;
+
+            if (attrValue.includes('{{')) {
+                let matches = attrValue.match(/{{(.*?)}}/g);
+
+                if (matches) {
+                    matches.forEach((match) => {
+                        let value = match.replace('{{', '').replace('}}', '');
+                        let prop = element.parentNode.getAttribute(value);
+                        let parent = document.querySelector(element.parentNode.tagName);
+                        if (parent && parent.getAttribute(value)) {
+                            prop = parent.getAttribute(value);
+                        }
+                        attrValue = attrValue.replace(new RegExp(`{{${value}}}`, 'g'), prop);
+                    });
+                    element.setAttribute(attr.name, attrValue);
+                }
+            }
+        });
+        let matches = element.innerHTML.match(/{{(.*?)}}/g);
+
+        if (matches) {
+            matches.forEach((match) => {
+
+                let value = match.split('{{')[1].split('}}')[0];
+                let el = dhtml.querySelector(element.tagName);
+                let parent = el.parentNode.tagName;
+                html.querySelectorAll('*').forEach((item) => {
+                    if (item.tagName == parent) {
+                        let prop = item.getAttribute(value);
+                        if (prop) {
+                            if (prop.toString().toLowerCase() == 'true') {
+                                prop = prop.toString().toLowerCase();
+                            }
+                            let attrValue = element.innerHTML.replace(new RegExp(`{{${value}}}`, 'g'), prop);
+                            element.innerHTML = attrValue;
+                        }
+                    }
+                });
+            });
+        }
+        if (element.hasAttribute('state')) {
+            let state = element.getAttribute('state')
+
+
+            element.innerHTML = element.innerHTML + getState(state)
+            if (document.querySelector(element.tagName)) {
+                document.querySelector(element.tagName).innerHTML = element.innerHTML
+            }
+            effect((state), (state) => {
+                if (document.querySelector(element.tagName)) {
+                    document.querySelector(element.tagName).innerHTML = state
+                }
+            })
+        }
+        
+    });
+
+
+    if(item.getAttribute('exports')){
+       
+        let exported = item.getAttribute('exports').split(',');
+        exported.forEach(async (exportItem) => {
+       
+            let el = dhtml.querySelector(exportItem) ? dhtml.querySelector(exportItem) :  html.querySelector(exportItem)
+        
+                
+            function waitForElm(selector) {
+                return new Promise(resolve => {
+                    if (document.querySelector(selector)) {
+                        return resolve(document.querySelector(selector));
+                    }
+            
+                    const observer = new MutationObserver(mutations => {
+                        if (document.querySelector(selector)) {
+                            resolve(document.querySelector(selector));
+                            observer.disconnect();
+                        }
+                    });
+            
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                });
+            }
+            let elm = await waitForElm(exportItem)
+            
+                 
+           elm.innerHTML = el.innerHTML
+            
+       
+        
+
+    });
+    }
+
+
+
+     
+        
+ 
+  
+   
+
+
+}
+
+window.Router = Router;
+window.dox = dox;
+ 
+
+const states = {};
+
+// Function to set the state value
+const setState = ($name, $value) => {
+    states[$name] = $value;
+    window.postMessage({ name: $name, value: $value }, '*');
+};
+
+// Function to get the state value
+const getState = ($name) => {
+    return states[$name];
+};
+
+// Event listener to update the state when receiving messages
+window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin) return;
+    const { name, value } = event.data;
+    states[name] = value;
+});
+
+// Function to handle side effects based on state changes
+const effect = ($name, callback = () => { }) => {
+    window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin) return;
+        const { name, value } = event.data;
+        if (name === $name)
+            callback(value);
+        return;
+    });
+};
+window.effect = effect
+window.getState = getState
+
+window.setState = setState
+window.dox = dox;
+
+
+ 
