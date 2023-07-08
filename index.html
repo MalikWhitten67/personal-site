@@ -14,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
     <meta name="revisit-after" content="1 days">
-    <meta imports="./pages/main.html, ./assets/js/app.js, ./types/variables.html" />
+    <meta imports="./pages/main.html, ./assets/js/app.js, ./types/variables.html, ./pages/404.html" />
     <link rel="stylesheet" href="./assets/styles/daisyui.css">
     <script src="./assets/js/tailwind.js"></script>
     <link rel="preload" href="./assets/js/tailwind.js" as="script">
@@ -26,7 +26,10 @@
 
 <body  >
    <render route="/" title="home">
-    <main></main>
+    <main ></main>
+   </render>
+   <render route="404" title="404 not found">
+     <notfound></notfound>
    </render>
 </body>
 
