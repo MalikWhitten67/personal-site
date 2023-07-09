@@ -337,34 +337,8 @@ const parser = async (data) => {
         return;
         }
         
-        html.querySelectorAll('img').forEach((item) => {
-            console.log(item)
-            item.setAttribute('loading', 'lazy');
-            let preload = document.createElement('link');
-            preload.setAttribute('rel', 'preload');
-            preload.setAttribute('href', item.getAttribute('src'));
-            
-            preload.setAttribute('as', 'image');
-            document.querySelector('head').appendChild(preload);
-            // load img chunk by chunk
-            let src = item.getAttribute('src');
-            let img = new Image();
-            img.src = src;
-            img.onload = () => {
-                item.src = src;
-           
-            }
-        });
-        html.querySelectorAll('a').forEach((item) => {
-            item.setAttribute('target', '_blank');
-            if (item.hasAttribute('href') && item.getAttribute('href').startsWith('/')){
-                 item.setAttribute('href', item.getAttribute('href').replace('/', ''))
-            
-               
-            }
-
-        }) 
-
+       
+      
          
 
     });
@@ -373,7 +347,16 @@ const parser = async (data) => {
  
       
 
-  
+    html.querySelectorAll('a').forEach((item) => {
+        item.setAttribute('target', '_blank');
+        if (item.hasAttribute('href') && item.getAttribute('href').startsWith('/')){
+             item.setAttribute('href', item.getAttribute('href').replace('/', ''))
+        
+           
+        }
+
+    }) 
+
     
       
       
@@ -1465,7 +1448,7 @@ async function setData(data, html, body, item) {
                     }
                 });
             }
-            let attributes = Object.values(element.attributes);
+            let attributes = Object.values(item.attributes);
 
 
             attributes.forEach((attr) => {
@@ -1478,24 +1461,24 @@ async function setData(data, html, body, item) {
                     if (matches) {
                         matches.forEach((match) => {
                             let value = match.replace('{{', '').replace('}}', '');
-                            let prop = element.parentNode.getAttribute(value);
-                            let parent = document.querySelector(element.parentNode.tagName);
+                            let prop = item.parentNode.getAttribute(value);
+                            let parent = document.querySelector(item.parentNode.tagName);
                             if (parent && parent.getAttribute(value)) {
                                 prop = parent.getAttribute(value);
                             }
                             attrValue = attrValue.replace(new RegExp(`{{${value}}}`, 'g'), prop);
                         });
-                        element.setAttribute(attr.name, attrValue);
+                       item.setAttribute(attr.name, attrValue);
                     }
                 }
             });
-            let matches = element.innerHTML.match(/{{(.*?)}}/g);
+            let matches =  item.innerHTML.match(/{{(.*?)}}/g);
 
             if (matches) {
                 matches.forEach((match) => {
 
                     let value = match.split('{{')[1].split('}}')[0];
-                    let el = dhtml.querySelector(element.tagName);
+                    let el = dhtml.querySelector(item.tagName);
                     let parent = el.parentNode.tagName;
                     html.querySelectorAll('*').forEach((item) => {
                         if (item.tagName == parent) {
