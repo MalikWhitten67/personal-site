@@ -11,7 +11,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo hello world",
-    "build": "npx tailwindcss -i ./src/dev/app.css -o ./public/styles/main.css --watch"
+    "build": "npx tailwindcss -i ./src/dev/app.css -o ./public/styles/main.css --watch --minify"
 
   },
   "keywords": [
