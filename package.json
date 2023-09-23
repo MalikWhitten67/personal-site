@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "daisyui": "^3.7.7",
+    "tailwindcss": "^3.3.3",
+    "vaderjs": "^1.0.3"
+  },
+  "name": "personal_site",
+  "version": "1.0.0",
+  "description": "My personal website built with tailwind daisy and vader.js",
+  "main": "index.html",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo hello world",
+    "build": "npx tailwindcss -i ./src/dev/app.css -o ./public/styles/main.css --watch"
+
+  },
+  "keywords": [
+    "personal",
+    "website"
+  ],
+  "author": "Malikwhitten67",
+  "license": "MIT"
+}
