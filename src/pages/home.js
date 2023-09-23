@@ -4,12 +4,20 @@ export const Home = component("home", {
   render: async () => {
     let home = await include('./src/views/home.html')
     let navbar = await include('./src/components/nav.html')
-    let footer = await include('./src/components/footer.html')
    
+ 
     return vhtml`
+    <div>
+    
     ${navbar}
     ${home}
-    ${footer}
+    </div>
     `;
   },
+  componentDidMount: () => {
+    console.log("Home component mounted");
+  },
+  componentUpdated: () => {
+    console.log("Home component updated");
+  }
 });
