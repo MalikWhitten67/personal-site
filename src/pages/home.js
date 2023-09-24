@@ -7,7 +7,7 @@ export const Home = component("home", {
    
  
     return vhtml`
-    <div>
+    <div class="w-screen">
     
     ${navbar}
     ${home}
