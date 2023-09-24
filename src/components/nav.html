@@ -1,10 +1,10 @@
-<div class="flex flex-row bg-base-100  p-5 justify-center mx-auto items-center ">
-    <div class="flex-none">
+<div class="flex flex-row bg-base-100 border h-16 border-slate-200 mt-0 mb-0 p-2   justify-center mx-auto items-center ">
+    <div class="flex-none p-5">
         <div class="flex flex-row gap-5">
             <img src="/public/images/pfp.webp"
             class="rounded-full w-6 h-6 avatar"
             >
-            <p class="  ">Malik Whitten</p>
+            <a href="#/home" class="  ">Malik Whitten</a>
           </div>
    
       </div>
@@ -17,16 +17,27 @@
       <ul class="menu menu-horizontal ">
        
            
-        <li
-        class="  p-2 bg-transparent"
-        ><a
-        class="flex flex-row    text-start "    
-        > 
-          <img src="/public/icons/account_icon.svg" class="w-5 h-5">
-           
-          About Me
-        </a>
-        </li>
+        ${
+       
+         $CURRENT_URL === "/home" ?
+          ` <li
+          class="  p-2 bg-transparent focus:bg-transparent hover:bg-transparent"
+          ><a
+          href="#/about"
+          class="flex flex-row    text-start "    
+          > 
+            <img src="/public/icons/account_icon.svg" class="w-5 h-5">
+             
+            About Me
+          </a>
+          </li>`
+          :` <li class="  p-2 bg-transparent">
+            <a href="#/home" class="flex flex-row   hover:text-blue-500 text-start "    > 
+              <img src="/public/icons/home.svg" class="w-4 h-4">
+               Go Back
+            </a>
+          </li>`
+        }
       </ul>
     </div>
 </div>
