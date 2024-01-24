@@ -10,7 +10,7 @@
   "dependencies": {
     "daisyui": "^4.6.0",
     "postcss-cli": "^11.0.0",
-    "vaderjs": "^1.3.3-alpha-65"
+    "vaderjs": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
