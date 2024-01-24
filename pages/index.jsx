@@ -1,7 +1,7 @@
 import { useState } from 'vaderjs/client'
 import Nav from '../src/nav.jsx'
 import styles from '../public/css/test.module.css'
-
+import '../public/css/styles.css'
 import Footer from '../src/footer.jsx'
 
 export default function (req, res) {
