@@ -5,7 +5,7 @@
   "scripts": {
     "compile": "npx vaderjs@latest --build",
     "build:css": "postcss src/css/dev.css -o dist/public/css/styles.css",
-    "dev": "npx vaderjs@latest --watch &&  tailwindcss -i src/css/dev.css -o ./dist/public/css/styles.css --watch"
+    "dev": "npx vaderjs@latest --build &&  tailwindcss -i src/css/dev.css -o ./dist/public/css/styles.css --watch"
   },
   "dependencies": {
     "daisyui": "^4.6.0",
