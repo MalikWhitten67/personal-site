@@ -1,9 +1,13 @@
 import { useState } from 'vaderjs/client'
 import Nav from '../src/nav.jsx'
-import styles from '../public/css/test.module.css'
-import '../public/css/styles.css'
+import styles from '../public/css/test.module.css' 
 import Footer from '../src/footer.jsx'
-
+export const $metadata = {
+    title: "Malik Whitten - Home",
+    styles:['/public/css/styles.css'],
+    description: "Malik Whitten's personal website", 
+    icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
+}
 export default function (req, res) {
     let [state, setState] = useState({ name: 'Malik Whitten' })
     let logo = "https://avatars.githubusercontent.com/u/123524260?s=200&v=4"
@@ -21,7 +25,7 @@ export default function (req, res) {
                    Homeschooled Senior - attending <a href="https://northtechnical.org/" target="_blank" className="text-blue-500    hover:underline">North Technical High School</a> in St. Louis, MO.
                 </p>
                 <p>
-                    I am a 16yo Full stack web developer with a passion for building fast, secure, and scalable web applications.
+                    I am a 16yo Full stack web developer with a passion for building fast, secure, and scalable web applications. i love to learn new things and am always looking for new opportunities to grow my skills.
                 </p>
                 <br></br>
                 
@@ -67,7 +71,7 @@ export default function (req, res) {
                 </h1>
                 <ul className="list-disc list-inside">
                  <li>
-                    <a href="#/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" className="text-blue-500    hover:underline">A warm Welcome from me - 1/24/2024</a>
+                    <a href="/blog/#/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" className="text-blue-500    hover:underline">A warm Welcome from me - 1/24/2024</a>
                  </li>
                   
                  </ul>

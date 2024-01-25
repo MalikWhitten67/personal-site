@@ -1,5 +1,11 @@
 import Pocketbase from '../../public/js/pocketbase.es.mjs'
 import Nav from '../../src/nav.jsx'
+export const $metadata = {
+    title: "Malik Whitten - Blog",
+    styles:['/public/css/styles.css'],
+    description: "Malik Whitten's personal website", 
+    icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
+}
 export default function (req, res) { 
     return <>
         <div key="blog" className="flex flex-col  mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] ">
@@ -9,7 +15,7 @@ export default function (req, res) {
                <ul className="list-disc list-inside">
                 <h1>About Me</h1>
                 <li>
-                    <a href="#/blog/general/lw0qsaxnrogkfbg?state=A warm welcome from me!" className="text-blue-500    hover:underline">A warm welcome from me!</a>
+                    <a href="#/general/lw0qsaxnrogkfbg?state=A warm welcome from me!" className="text-blue-500    hover:underline">A warm welcome from me!</a>
                 </li>
                </ul>
             </div>

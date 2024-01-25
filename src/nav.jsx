@@ -33,16 +33,16 @@ export default function (props) {
     <div className="navbar   w-full  xl:px-64 p-5   " key="nav">
 
       <div className="navbar-start">
-        <a href="#/" className=" text-xl">Malik Whitten</a>
+        <a href="/" className=" text-xl">Malik Whitten</a>
       </div>
       <div className="navbar-center xl:block lg:block md:block hidden">
         <ul className="flex gap-5 ">
           <li>
-             <a href="#/blog">Blog</a>
+             <a href="/blog">Blog</a>
           </li>
 
           <li>
-            <a href="#/contact">Contact</a>
+            <a href="/contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -76,11 +76,11 @@ export default function (props) {
               </a>
             </li>
             <li>
-              <a href="#/blog">  Blog</a>
+              <a href="/blog">  Blog</a>
             </li>
 
             <li>
-              <a> Contact</a>
+              <a href="/contact"> Contact</a>
             </li>
           </ul>
         </div>
