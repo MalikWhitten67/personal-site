@@ -7,8 +7,8 @@ api.autoCancellation(false)
 export default function (req, res) {
     let category = req.params.category
     let page = req.params.page
-    this.router.use = async (req, res) => { 
-        if(!window.cache || !window.cache[category][page]) req.pause = true;
+    this.router.use = async (req, res) => {
+        req.pause = true;
         res.send(<>
             <div className="w-screen h-screen mx-auto justify-center  flex flex-col gap-5  hero">
                 ${!category || !page ? <><h1 className="text-2xl font-bold">Error: Invalid Blog Post Query</h1></> : <><span className="loading text-blue-500    loading-spinner"></span> <span>Loading:

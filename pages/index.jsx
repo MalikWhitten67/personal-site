@@ -1,4 +1,4 @@
-import { useState } from 'vaderjs/client'
+import { useState, Link } from 'vaderjs/client'
 import Nav from '../src/nav.jsx'
 import styles from '../public/css/test.module.css' 
 import Footer from '../src/footer.jsx'
@@ -71,7 +71,7 @@ export default function (req, res) {
                 </h1>
                 <ul className="list-disc list-inside">
                  <li>
-                    <a href="/blog/#/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" className="text-blue-500    hover:underline">A warm Welcome from me - 1/24/2024</a>
+                    <Link key="home" href="/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A warm Welcome from me - 1/24/2024</Link> 
                  </li>
                   
                  </ul>
