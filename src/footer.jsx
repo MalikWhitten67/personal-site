@@ -3,7 +3,7 @@ import { Component } from "vaderjs/client";
 export default class Footer extends Component {
     constructor(props) {
         super(props)
-        this.key = "footer"
+        this.key = "footer "
     }
 
     render() {
