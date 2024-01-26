@@ -3,7 +3,7 @@ import Nav from '../src/nav.jsx'
 import styles from '../public/css/test.module.css' 
 import Footer from '../src/footer.jsx'
 export const $metadata = {
-    title: "Malik Whitten - Home",
+    title: "Home",
     styles:['/public/css/styles.css'],
     description: "Malik Whitten's personal website", 
     icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
