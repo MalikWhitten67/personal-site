@@ -1,5 +1,5 @@
 import style from '../public/css/test.module.css'
-import Link  from 'vaderjs/client'
+import { Link}   from 'vaderjs/client'
 export default function (props) {
   let [theme, setTheme] = useState(localStorage.getItem('theme') || 'default')
 
