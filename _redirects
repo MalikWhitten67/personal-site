@@ -1,1 +1,1 @@
-/blog/* /blog 200
+/blog/* /blog/:genera/:page 200
