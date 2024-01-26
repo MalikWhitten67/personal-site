@@ -16,8 +16,11 @@ export default function (req, res) {
                <ul className="list-disc list-inside">
                 <h1>About Me</h1>
                 <li>
-                    <Link key="blog" href="/blog/general/lw0qsaxnrogkfbg?state=A warm welcome from me!" className="text-blue-500  cursor-pointer   hover:underline">A warm welcome from me!</Link> 
+                    <Link key="warm_welcome" href="/blog/general/lw0qsaxnrogkfbg?state=A warm welcome from me!" className="text-blue-500  cursor-pointer   hover:underline">A warm welcome from me!</Link> 
                 </li>
+                <li>
+                    <Link key="vader_blogs" href="/blog/vader_blogs/yosinnfweatoqjw?state=A Day of Struggles and Triumphs: Server-Side Generation with VaderJS" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A Day of Struggles and Triumphs - 1/25/2024</Link>
+                 </li>
                </ul>
             </div>
 

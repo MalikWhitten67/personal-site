@@ -3,9 +3,9 @@ import Nav from '../src/nav.jsx'
 import styles from '../public/css/test.module.css' 
 import Footer from '../src/footer.jsx'
 export const $metadata = {
-    title: "Home",
+    title: "Malik Whitten - Home",
     styles:['/public/css/styles.css'],
-    description: "Home Route", 
+    description: "Malik Whitten's personal website", 
     icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
 }
 export default function (req, res) {
@@ -71,7 +71,10 @@ export default function (req, res) {
                 </h1>
                 <ul className="list-disc list-inside">
                  <li>
-                    <Link key="home" href="/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A warm Welcome from me - 1/24/2024</Link> 
+                    <Link key="warm_welcome" href="/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A warm Welcome from me - 1/24/2024</Link> 
+                 </li>
+                 <li>
+                    <Link key="vader_blogs" href="/blog/vader_blogs/yosinnfweatoqjw?state=A Day of Struggles and Triumphs: Server-Side Generation with VaderJS" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A Day of Struggles and Triumphs - 1/25/2024</Link>
                  </li>
                   
                  </ul>
