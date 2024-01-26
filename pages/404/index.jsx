@@ -1,4 +1,4 @@
-import {Link} from 'vaderjs/client'
+import Link from 'vaderjs/client'
 export const $metadata = {
     title: "404 Page Not Found",
     styles:['/public/css/styles.css'],
