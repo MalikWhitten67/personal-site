@@ -5,7 +5,7 @@ import Footer from '../src/footer.jsx'
 export const $metadata = {
     title: "Home",
     styles:['/public/css/styles.css'],
-    description: "Malik Whitten's personal website", 
+    description: "Home Route", 
     icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
 }
 export default function (req, res) {
