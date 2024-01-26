@@ -1,4 +1,3 @@
-import Pocketbase from '../../public/js/pocketbase.es.mjs'
 import Nav from '../../src/nav.jsx'
 import { Link } from 'vaderjs/client'
 export const $metadata = {
