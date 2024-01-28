@@ -1,5 +1,20 @@
 {
-    "rewrites": [
-        { "source": "/blog/:path*", "destination": "/blog/index.html" }
-    ]
+  "rewrites": [
+    {
+      "source": "/counter/*",
+      "destination": "/counter/index.html"
+    },
+    {
+      "source": "/contact/*",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/blog/*",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/404/*",
+      "destination": "/404/index.html"
+    }
+  ]
 }
