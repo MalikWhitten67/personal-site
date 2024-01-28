@@ -1,15 +1,20 @@
 import Nav from '../../src/nav.jsx'
 import { Link, Head } from 'vaderjs/client'
-
+import { Layout } from '../../src/layout.jsx';
 export const $prerender = false;
 
 export default function (req, res) { 
-    return <>
-        <Head prerender="false">
-            <title>Malik Whitten - Blog</title>
-            <link rel="stylesheet" href="/public/css/styles.css" />
-            <script src="/src/theme.js" eager> </script>
-        </Head>
+    return (
+        <>
+        <Layout 
+         
+         {...{
+            title: 'Malik Whitten',
+            description: 'Malik Whitten Personal Website',
+            logo: '/public/images/logo.png'
+         }}
+        
+        >
         <div key="blog" className="flex flex-col  mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] ">
             <Nav />
             <div className="flex flex-col gap-5 xl:px-64 lg:px-64 md:px-64 p-5">
@@ -26,5 +31,9 @@ export default function (req, res) {
             </div>
 
         </div>
+        </Layout>
+         
+       
     </>
+    )
 }

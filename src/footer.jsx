@@ -7,10 +7,16 @@ export default class Footer extends Component {
     }
 
     render() {
-        return <>
+        return  (
+            <>
              <div className=" gap-5 mt-12     text-md" key="footer">
             
-            <div className="flex gap-5 flex-wrap">
+            <div className="flex gap-5 flex-wrap"
+            
+            onClick={(event)=>{
+                console.log(event)
+            }}
+            >
                     <p>Copyright © 2023 / ${new Date().getFullYear()} - Malik Whitten </p>
                     <p>
                         Built with <a href="https://vader-js.pages.dev/" target="_blank" class="text-blue-500    hover:underline">VaderJS</a> v${Vader.version}
@@ -21,8 +27,7 @@ export default class Footer extends Component {
                     </p>
                 </div>
              </div>
-            
-
-        </>
+            </>
+        )
     }
 }
