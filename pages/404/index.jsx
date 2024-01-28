@@ -4,6 +4,7 @@ export const $metadata = {
     styles:['/public/css/styles.css'],
     description: "You have reached a page that does not exist", 
     icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
+    lang: "en-US"
 }
 export default function (req, res) {
     return <>

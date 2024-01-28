@@ -1,17 +1,19 @@
 import Nav from '../../src/nav.jsx'
-import { Link } from 'vaderjs/client'
-export const $metadata = {
-    title: "Malik Whitten - Blog",
-    styles:['/public/css/styles.css'],
-    description: "Malik Whitten's personal website", 
-    icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
-}
+import { Link, Head } from 'vaderjs/client'
+
+export const $prerender = false;
+
 export default function (req, res) { 
     return <>
+        <Head prerender="false">
+            <title>Malik Whitten - Blog</title>
+            <link rel="stylesheet" href="/public/css/styles.css" />
+            <script src="/src/theme.js" eager> </script>
+        </Head>
         <div key="blog" className="flex flex-col  mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] ">
             <Nav />
             <div className="flex flex-col gap-5 xl:px-64 lg:px-64 md:px-64 p-5">
-               <h1 className="text-2xl font-bold">Blog Articles 2 </h1>
+               <h1 className="text-2xl font-bold">Blog Articles </h1>
                <ul className="list-disc list-inside">
                 <h1>About Me</h1>
                 <li>

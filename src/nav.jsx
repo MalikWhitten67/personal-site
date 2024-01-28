@@ -5,12 +5,7 @@ export default function (props) {
 
   let themeref = useRef(theme)
 
-  if (theme === 'default') {
-    document.documentElement.setAttribute('data-theme', 'light')
-  } else {
-    document.documentElement.setAttribute('data-theme', 'black')
-  }
-
+  
   function toggleTheme(e) { 
     switch (e.target.checked) {
       case true:
@@ -28,12 +23,13 @@ export default function (props) {
     }
   }
 
+  console.log(props)
 
   return <>
     <div className="navbar   w-full  xl:px-64 p-5   " key="nav">
 
       <div className="navbar-start">
-       <Link key="home" href="/" className="cursor-pointer">Malik Whitten</Link>
+       <Link key="home" href="/" className="cursor-pointer">Home</Link>
       </div>
       <div className="navbar-center xl:block lg:block md:block hidden">
         <ul className="flex gap-5 ">

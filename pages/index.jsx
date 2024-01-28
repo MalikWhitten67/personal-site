@@ -1,22 +1,41 @@
-import { useState, Link } from 'vaderjs/client' 
+import { useState, Link, Head, Html} from 'vaderjs/client' 
 import Nav from '../src/nav.jsx'
 import styles from '../public/css/test.module.css' 
 import Footer from '../src/footer.jsx'
-export const $metadata = {
-    title: "Malik Whitten - Home",
-    styles:['/public/css/styles.css'],
-    description: "Malik Whitten's personal website", 
-    icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
-}
+ 
 export default function (req, res) {
     let [state, setState] = useState({ name: 'Malik Whitten' })
     let logo = "https://avatars.githubusercontent.com/u/123524260?s=200&v=4"
     
   
     return <>
+       <Html lang="en-us">
+       <Head>
+            <title>Malik Whitten - Home</title>
+            <meta charset="utf-8" />
+            <meta name="description" content="Malik Whitten's personal website" />
+            <meta name="theme-color" content="#000000" />
+            <meta name="robots" content="index, follow" />
+            <meta name="author" content="Malik Whitten" />
+            <meta name="keywords" content="Malik Whitten, Malik, Whitten, Malik Whitten Blog, Malik Whitten Website, Malik Whitten Personal Website, Malik Whitten Blog" />
+            <meta name="url" content="https://malikwhitten.com" />
+            <meta name="identifier-URL" content="https://malikwhitten.com" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="icon" href={logo} /> 
+            <script src="/src/theme.js" eager> </script>
+            <link rel="stylesheet" href="/public/css/styles.css" />
+       </Head>
        <div className="flex  flex-col   mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] ">
-        <Nav />
-        <div style={{...styles.mono}} key={2} className="      lg:px-64 xl:px-64 md:px-64 p-5"  >
+       
+        <Nav 
+        className={`navbar   w-full  xl:px-64 p-5 `}
+        click={(e, test)=>{
+            console.log("clicked")
+        }}   click2={()=>{
+            console.log("clicked")
+        }} />
+
+        <div style={{...styles.mono}}   className="      lg:px-64 xl:px-64 md:px-64 p-5"  >
 
              
             <div className="mt-2 prose flex flex-col flex-wrap text-[15px]  gap-2 break-words">
@@ -32,6 +51,8 @@ export default function (req, res) {
                 <h1 className="text-2xl">
                     Project Highlights
                 </h1>
+                
+
                 <ul className="list-disc list-inside"> 
                     <div className="divider mt-2"><p>Github Repos</p></div>
                     <li>
@@ -71,7 +92,7 @@ export default function (req, res) {
                 </h1>
                 <ul className="list-disc list-inside">
                  <li>
-                    <Link key="warm_welcome" href="/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A warm Welcome from me - 1/24/2024</Link> 
+                    <Link   href="/blog/general/lw0qsaxnrogkfbg?state=A Warm Welcome From Me!" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A warm Welcome from me - 1/24/2024</Link> 
                  </li>
                  <li>
                     <Link key="vader_blogs" href="/blog/vader_blogs/yosinnfweatoqjw?state=A Day of Struggles and Triumphs: Server-Side Generation with VaderJS" title="Blog" className="text-blue-500 cursor-pointer   hover:underline">A Day of Struggles and Triumphs - 1/25/2024</Link>
@@ -99,6 +120,7 @@ export default function (req, res) {
         </div>
         
        </div>
+       </Html>
     </>
 }
 

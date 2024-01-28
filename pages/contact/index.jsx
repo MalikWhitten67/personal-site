@@ -1,15 +1,17 @@
-import { useState } from "vaderjs/client";
+import { useState, Head} from "vaderjs/client";
 import Nav from "../../src/nav.jsx";
 import Footer from "../../src/footer.jsx";
 import style from '../public/css/test.module.css'
-export const $metadata = {
-    title: "Contact - Malik Whitten",
-    styles:['/public/css/styles.css'],
-    description: "Malik Whitten's personal website", 
-    icon: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
-}
+ 
 export default function (req, res) {
     return <>
+        <Head>
+            <title>Malik Whitten - Contact</title>
+            <meta charset="utf-8" />
+            <meta name="description" content="Contact Me" />
+            <link rel="stylesheet" href="/public/css/styles.css" /> 
+            <script src="/src/theme.js" eager> </script>
+        </Head>
         <div key="contact" className="flex flex-col  mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] ">
             <Nav key="nav" />
             <div style={{ ...style.mono }} className=" text-md lg:px-64   p-5">
