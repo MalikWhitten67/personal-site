@@ -39,7 +39,7 @@ export default function (req, res) {
                    <a href="https://github.com/Postr-Inc" target="_blank" className="text-blue-500    hover:underline">Postr</a> - A social media platform  with a strict focus on privacy and security. <span className="text-red-500">WIP</span>
                    </li>
                    <li>
-                   <a href="https://vader-js.pages.dev/" target="_blank" className="text-blue-500    hover:underline">VaderJS</a> - A React-like framework for building faster SPA's.  
+                   <a href="https://github.com/Postr-Inc/Vader.js" target="_blank" className="text-blue-500    hover:underline">VaderJS</a> - A React-like framework for building faster SPA's.  
                    </li>
                    <li>
                         <a href="https://github.com/MalikWhitten67/html-dox" target="_blank" className="text-blue-500    hover:underline">HTML-Dox</a> - A svelte like framework for functional HTML.
