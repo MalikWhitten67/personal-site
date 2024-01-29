@@ -8,7 +8,7 @@ export default function (req, res) {
         <>
         <Layout 
          
-         {...{
+         $={{
             title: 'Malik Whitten',
             description: 'Malik Whitten Personal Website',
             logo: '/public/images/logo.png'
