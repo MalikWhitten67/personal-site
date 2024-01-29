@@ -95,7 +95,7 @@ export default function (req, res) {
                 ].map((e) => {
                   return <>
                     <li>
-                      <Link href={e.link} className="text-blue-500    hover:underline">${e.title}</Link>
+                      <Link href={e.link} className="text-blue-500   cursor-pointer hover:underline">${e.title}</Link>
                     </li>
                   </>
                 }).join('')
