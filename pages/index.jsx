@@ -25,7 +25,7 @@ export default function (req, res) {
 
           <Nav />
 
-          <div style={{ ...styles.mono }} className="      lg:px-64 xl:px-64 md:px-64 p-5"  >
+          <div style={{ ...styles.mono }} className="lg:px-64 xl:px-64 md:px-64 p-5"  >
 
 
             <div className="mt-2 prose flex flex-col flex-wrap text-[15px]  gap-2 break-words">
