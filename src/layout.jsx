@@ -1,4 +1,4 @@
-import { Html, Head } from "vaderjs/client"
+import { Html, Head } from "vaderjs/client" 
 /**
  * 
  * @param {*} props 
@@ -14,7 +14,7 @@ export function Layout (/*
     @param {String} props.description
     @param {String} props.children
     @param {String} props.logo
-**/{title, description, children, logo}){ 
+**/{title, description, children, logo}){  
     return <>
     <Html lang="en-us">
         <Head>
@@ -32,6 +32,7 @@ export function Layout (/*
         </Head>
 
         ${children}
+        
     </Html>
     </>
 }

@@ -7,7 +7,7 @@ import { Layout } from "../../src/layout.jsx";
 export default function (req, res) {
   return (
     <>
-      <Layout  {...{ title: "Malik Whitten", description: "Malik Whitten Personal Website", logo:  '/public/logo.png' }}
+      <Layout  $={{title: "Malik Whitten", description: "Malik Whitten Personal Website",logo: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",}}
       >
         <div
           key="contact"
