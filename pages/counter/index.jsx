@@ -11,7 +11,8 @@ export default function(req, res){
    return  <>
     <div key="counter">
       <h1 ref={counterRef.bind}>${count}</h1>
-      <button onClick={(event)=>{ 
+      <button  
+      onClick={(event)=>{ 
         increment()
       }}>Increment</button>
     </div>

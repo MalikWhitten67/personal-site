@@ -4,8 +4,7 @@ import Nav from "../../../src/nav.jsx"
 import Footer from "../../../src/footer.jsx"
 const api = new Pocketbase('https://malik.pockethost.io')
 api.autoCancellation(false)
-export default function (req, res) {
-    console.log(req)
+export default function (req, res) { 
     let category = req.params.category
     let page = req.params.page
     this.router.use = async (req, res) => {
