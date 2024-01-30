@@ -8,7 +8,7 @@ export default function (req, res) {
   return (
     <>
       <Layout
-        title="Malik Whitten"
+        title="Malik Whitten - Contact"
         description="Malik Whitten Personal Website"
         logo="https://avatars.githubusercontent.com/u/123524260?s=200&v=4"
         
