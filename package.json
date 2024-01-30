@@ -3,9 +3,9 @@
   "version": "1.2.0",
   "description": "Personal website",
   "scripts": {
-    "compile": "npx vaderjs@latest --build",
+    "compile": "npx vaderjs@latest build",
     "build:css": "postcss src/css/dev.css -o dist/public/css/styles.css",
-    "build": "npx vaderjs@latest --build &&  tailwindcss -i src/css/dev.css -o ./dist/public/css/styles.css --minify"
+    "build": "npx vaderjs@latest build &&  tailwindcss -i src/css/dev.css -o ./dist/public/css/styles.css --minify"
   },
   "dependencies": {
     "daisyui": "^4.6.0",
