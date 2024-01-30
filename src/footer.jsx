@@ -12,7 +12,10 @@ export default class Footer extends Component {
              <div className=" gap-5 mt-12     text-md" key="footer">
             
             <div className="flex gap-5 flex-wrap"
-             
+            
+            onClick={(event)=>{
+                console.log(event)
+            }}
             >
                     <p>Copyright © 2023 / ${new Date().getFullYear()} - Malik Whitten </p>
                     <p>
