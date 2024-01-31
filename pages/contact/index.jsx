@@ -22,22 +22,7 @@ export default function (req, res) {
         >
           <Nav 
             ${...{
-               key: "nav",
-              guard: {
-                title: "Malik Whitten - Blog",
-                description: "Malik Whitten Personal Website",
-                logo: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
-                onClick: () => {
-                  console.log("clicked");
-                },
-                test: {
-                  test: "test",
-                },
-                style: {
-                  nav: {
-                    backgroundColor: "red",
-                  },
-                },
+               key: "nav"
             }}
           }
  
