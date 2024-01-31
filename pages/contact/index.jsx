@@ -8,17 +8,41 @@ export default function (req, res) {
   return (
     <>
       <Layout
-        title="Malik Whitten - Contact"
-        description="Malik Whitten Personal Website"
-        logo="https://avatars.githubusercontent.com/u/123524260?s=200&v=4"
-        
+        ${...{
+          title: "Malik Whitten",
+          description: "Malik Whitten Personal Website",
+          logo: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
+        }}
+       
       >
         <div
           key="contact"
           className="flex flex-col  mx-auto xl:justify-center  md:justify-center lg:justify-center  xl:w-[70vw] "
+          
         >
-          <Nav key="nav" />
-          <div style={{ ...style.mono }} className=" text-md lg:px-64   p-5">
+          <Nav 
+            ${...{
+               key: "nav",
+              guard: {
+                title: "Malik Whitten - Blog",
+                description: "Malik Whitten Personal Website",
+                logo: "https://avatars.githubusercontent.com/u/123524260?s=200&v=4",
+                onClick: () => {
+                  console.log("clicked");
+                },
+                test: {
+                  test: "test",
+                },
+                style: {
+                  nav: {
+                    backgroundColor: "red",
+                  },
+                },
+            }}
+          }
+ 
+          />
+          <div className=" text-md lg:px-64   p-5" style={{ ...style.mono }}>
             <h1 className="text-2xl">Contact</h1>
             <br></br>
             <div className="flex gap-5 hero w-full justify-between">

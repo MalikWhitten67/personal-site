@@ -20,6 +20,7 @@ export class Layout extends Component {
      */
     constructor(props){
         super(props)
+        console.log(props)
         this.props = {
             title: props.title,
             description: props.description,
@@ -34,7 +35,9 @@ export class Layout extends Component {
             lang={this.props?.lang || "en" }
             
             >
-                <Head>
+                <Head
+                updateOnReload={this.props?.updateOnReload || false}
+                >
                     <title>${this.props.title}</title>
                     <meta charset="utf-8" />
                     <meta name="description" content={this.props.description} /> 

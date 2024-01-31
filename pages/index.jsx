@@ -77,13 +77,10 @@ export default function (req, res) {
                   <p  >Github Repos</p>
                 </div>
                 <li>
-                  <a
-                    href="https://github.com/Postr-Inc"
-                    target="_blank"
-                    className="text-blue-500    hover:underline"
-                  >
+                  <Link href="https://github.com/Postr-Inc" action="_blank" className="text-blue-500    hover:underline">
                     Postr
-                  </a>${" "}
+                  </Link>
+                 
                   - A social media platform with a strict focus on privacy and
                   security. <span className="text-red-500">WIP</span>
                 </li>

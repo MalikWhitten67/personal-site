@@ -10,17 +10,7 @@ export default function (req, res) {
         title="Malik Whitten - blog"
         description="Malik Whitten Personal Website"
         logo="https://avatars.githubusercontent.com/u/123524260?s=200&v=4"
-        card={{
-          title: "Malik Whitten",
-          description: "Malik Whitten Personal Website",
-          logo: "/public/images/logo.png",
-          click: function () {
-            console.log("clicked");
-          },
-          click2: function () {
-            console.log("clicked");
-          },
-        }}
+        
       >
         <div
           key="blog"

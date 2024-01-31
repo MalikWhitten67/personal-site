@@ -2,10 +2,11 @@ import { Component, useState, useRef } from "vaderjs/client";
 import { Layout } from "../../src/layout.jsx";
 
 export default function (req, res) {
+  
   let counterRef = useRef(null);
-  let [count, setCount] = useState(0);
 
-  console.log(count);
+  let [count, setCount] = useState(0);
+ 
   return (
     <>
        <Layout
@@ -24,15 +25,24 @@ export default function (req, res) {
           height: "100vh",
         }}
       >
-        ${count}
+        <div>
+        ${
+          count > 5  ?
+            <>
+              <h1>Count is greater than 5</h1>
+            </>
+           : ""
+         }
+        </div>
+          ${count}
         <button
-          ref={counterRef}
-          className="btn btn-primary mt-5"
+         
           onClick={() => {
-            setCount(++count)
+            console.log(counterRef.current);
+            setCount(++count);
           }}
         >
-          Increment Counter
+          Increment Counter  
         </button>
       </div>
        </Layout>
