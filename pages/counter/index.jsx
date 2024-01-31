@@ -27,8 +27,9 @@ export default function (req, res) {
         ${count}
         <button
           ref={counterRef}
+          className="btn btn-primary mt-5"
           onClick={() => {
-            setCount(count + 1);
+            setCount(++count)
           }}
         >
           Increment Counter
