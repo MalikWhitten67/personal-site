@@ -224,7 +224,7 @@ export default function (req, res) {
                 </li>
               </ul>
             </div>
-            <button onClick={()=>{flick()}}>Flick</button>
+             
             <Footer key="footer" />
           </div>
         </div>
