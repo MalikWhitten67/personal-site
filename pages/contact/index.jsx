@@ -22,9 +22,10 @@ export default function (req, res) {
         >
           <Nav 
             ${...{
-               key: "nav"
+               key: "nav",
+               
             }}
-          }
+        
  
           />
           <div className=" text-md lg:px-64   p-5" style={{ ...style.mono }}>
