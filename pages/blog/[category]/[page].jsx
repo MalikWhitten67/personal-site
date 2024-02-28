@@ -96,8 +96,7 @@ export default function (req, res) {
             <h1 className="text-2xl font-bold">${this.data?.head}</h1>
             <p className="text-sm opacity-50">
               Published on ${new Date(this.data?.created).toLocaleDateString()}${" "}
-              - Length ${this.data?.body.length} - Read Time $
-              {Math.floor(this.data?.body.length / 200)} minutes
+              - Length ${this.data?.body.length} - Read Time ${Math.floor(this.data?.body.length / 200)} minutes
             </p>
             <div className="prose">${this.data?.body}</div>
             <Footer key="footer" />
