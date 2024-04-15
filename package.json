@@ -1,6 +1,6 @@
 {
   "scripts":{
-    "build":"npx vaderjs@latest prod"
+    "build":"npx vaderjs@latest prod "
   },
   "dependencies": {
     "pocketbase": "^0.21.1",
