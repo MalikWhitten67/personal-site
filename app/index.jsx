@@ -29,7 +29,7 @@ export default function App() {
 
             <br></br>
             <h1 style={{ marginBottom: '2.5rem' }}>
-                Project Highlights (14)
+                Project Highlights (15)
             </h1>
             <p>
                 Here are some of my projects that I am working on or have worked.
@@ -119,11 +119,18 @@ export default function App() {
                     </a>
                     - A  easier way to write backend code
                 </li>
+                <h1>Java Applications</h1>
                 <li>
-                    <a href='https://github.com/MalikWhitten67/calculator.java'>
+                    <a href='https://github.com/MalikWhitten67/calculator.java' taget="_blank">
                         Calculator.java
                     </a>
                     - A simple calculator written in Java
+                </li>
+                <li>
+                 <a href="https://github.com/MalikWhitten67/java_projects/tree/main/bank" taget="_blank"> 
+                  Capitol None
+                 </a>
+                 - A java swing simple banking application with interest - deposit fees and withdraw fees, utilizes a gridlayout, buttons, textfields, and option panels.
                 </li>
             </ul>
             <br></br>
