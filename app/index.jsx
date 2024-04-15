@@ -119,15 +119,15 @@ export default function App() {
                     </a>
                     - A  easier way to write backend code
                 </li>
-                <h1>Java Applications</h1>
+                <h3>Java Applications</h3>
                 <li>
-                    <a href='https://github.com/MalikWhitten67/calculator.java' taget="_blank">
+                    <a href='https://github.com/MalikWhitten67/calculator.java' target="_blank">
                         Calculator.java
                     </a>
                     - A simple calculator written in Java
                 </li>
                 <li>
-                 <a href="https://github.com/MalikWhitten67/java_projects/tree/main/bank" taget="_blank"> 
+                 <a href="https://github.com/MalikWhitten67/java_projects/tree/main/bank" target="_blank"> 
                   Capitol None
                  </a>
                  - A java swing simple banking application with interest - deposit fees and withdraw fees, utilizes a gridlayout, buttons, textfields, and option panels.
