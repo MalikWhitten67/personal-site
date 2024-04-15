@@ -10,52 +10,56 @@ export const head = () => {
     )
 }
 export default function App() { 
-    let { category, page } = params; 
-    if (!category || !page) {
-        return (
-            <div>
-                <p>
-                    Oops
-                </p>
-                <p>
-                    Looks like you're trying to access a blog post that doesn't exist.
-                </p>
-                <p>
-                    <a href='/'>Go back to the main page</a>
-                </p>
-            </div>
+    let { category, page } = params;   
+    if(!isServer && !category || !isServer && !page) return (
+        <div>
+            <p>
+                Oops
+            </p>
+            <p>
+                Looks like you're trying to access a blog post that doesn't exist.
+            </p>
+            <p>
+                <a href='/'>Go back to the main page</a>
+            </p>
+        </div>
 
-        )
-    }
+    );
 
-    let [blog, setBlog] = useState(localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page] || {})
+    let [blog, setBlog] = useState(!isServer && localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page] || {})
   
     let [loading, setLoading] = useState(true)
      
     useEffect(() => {  
         setTimeout(()=>{ 
-            if (localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page]) { 
-                console.log('from cache')
-                setLoading(false, 'blog')
-                return;
+            if(!isServer){
+                if (localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page]) { 
+                    console.log('from cache')
+                    setLoading(false)
+                    return;
+                }
+                api.collection('blog_pages').getOne(page).then(blog => {
+                    let blogs = JSON.parse(localStorage.getItem('blog')) || {} 
+                    blogs[page] = blog
+                    localStorage.setItem('blog', JSON.stringify(blogs))
+                    setBlog(blog, 'blog')
+                    setLoading(false)
+                })
             }
-            api.collection('blog_pages').getOne(page).then(blog => {
-                let blogs = JSON.parse(localStorage.getItem('blog')) || {} 
-                blogs[page] = blog
-                localStorage.setItem('blog', JSON.stringify(blogs))
-                setBlog(blog, 'blog')
-                setLoading(false, 'blog')
-            })
     
         },1500)
-    }, []) 
-    console.log(loading)
+    }, [])  
+    if(isServer){
+        return (
+            <div></div>
+        )
+    }
     if(loading) {
         return (
             <div key="blog" style={{ fontFamily: 'Arial', textAlign: 'center' , fontSize: '1.5rem', marginTop: '2rem' }}>
                 <p>
                     
-                {  new URLSearchParams(location.search).get('state') || 'Unknown'}
+                {  !isServer && new URLSearchParams(location.search).get('state') || 'Unknown'}
                 </p>  
                 <p> 
                     Fetching blog post...

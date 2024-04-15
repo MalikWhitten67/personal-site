@@ -1,84 +1,42 @@
 *{
-    font-family: monospace;
-    font-weight: 400;
+  font-family: monospace;
+  font-weight: 400;
 }
 
 body{
-    padding: 15px;
-    width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  padding: 15px;
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-@media screen and (max-width: 1024px) {
-    body{
-        width: 100%;
-        padding: 15px;
-    }
-    
+@media screen and (max-width:800px){
+  body{
+      width: 100%;
+      padding: 15px;
+  }
+  
 }
 
 a{
-    text-decoration: none;
-    color: rgb(59 130 246)
+  text-decoration: none;
+  color: rgb(59 130 246)
 }
 
 .blog-head > h1{ 
-    font-size: 1.5rem;
-    font-weight:bold !important;
+  font-size: 1.5rem;
+  font-weight:bold !important;
 }
 
 a:hover{ 
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .projects-list{ 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-
  
-
-.lds-ring,
-.lds-ring div {
-  box-sizing: border-box;
-}
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 8px solid currentColor;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: currentColor transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-

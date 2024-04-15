@@ -3,9 +3,10 @@ import Footer from '../components/footer';
 export const head = () => {
     return (
         <head>
-            <title>Test</title>
+            <title>Malik</title>
             <link rel="stylesheet" href="public/index.css" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta name="description" content="Welcome to my personal space on the internet..." />
             <meta charSet='utf-8' />
         </head>
     )
@@ -36,6 +37,9 @@ export default function App() {
             </p>
             <br></br>
             <ul className='projects-list'>
+                <h3>
+                    Javascript | TypeScript Projects <img src='https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/javascript/javascript-original.svg' width={20} height={20} />
+                </h3>
                 <li>
                     <a href='https://github.com/Postr-Inc' target='_blank'>
                         Postr
@@ -119,18 +123,18 @@ export default function App() {
                     </a>
                     - A  easier way to write backend code
                 </li>
-                <h3>Java Applications</h3>
+                <h3>Java Projects <img src="https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/java/java-original.svg" width={20} height={20}/></h3>
                 <li>
-                    <a href='https://github.com/MalikWhitten67/calculator.java' target="_blank">
+                    <a href='https://github.com/MalikWhitten67/calculator.java' target='_blank'>
                         Calculator.java
                     </a>
                     - A simple calculator written in Java
                 </li>
                 <li>
-                 <a href="https://github.com/MalikWhitten67/java_projects/tree/main/bank" target="_blank"> 
-                  Capitol None
-                 </a>
-                 - A java swing simple banking application with interest - deposit fees and withdraw fees, utilizes a gridlayout, buttons, textfields, and option panels.
+                    <a href='https://github.com/MalikWhitten67/java_projects/blob/main/bank/main.java' target='_blank'>
+                        Capitol None Banking App
+                    </a>
+                    - A banking application built with java swing, utilizes a flex layout, textfields buttons, and message popup panels. Includes apy, and deposit / withdrawel fees.
                 </li>
             </ul>
             <br></br>
