@@ -1,6 +1,18 @@
 {
     "rewrites": [
         {
+            "source": "/blog/",
+            "destination": "/blog/index.html"
+        },
+        {
+            "source": "/contact/",
+            "destination": "/contact/index.html"
+        },
+        {
+            "source": "/count/",
+            "destination": "/count/index.html"
+        },
+        {
             "source": "/blog/:category/:page",
             "destination": "/blog/[category]/index.html"
         },

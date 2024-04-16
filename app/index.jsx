@@ -1,5 +1,6 @@
 import { useState, e, useFetch, Component, useEffect } from 'vaderjs';
 import Footer from '../components/footer';
+import Navbar from '../components/navbar';
 export const head = () => {
     return (
         <head>
@@ -13,11 +14,12 @@ export const head = () => {
 }
 export default function App() {
     return (
-        <div key="main">
+        <div >
+            <Navbar />
+            
             <h1 style={{ fontSize: '2.5rem', fontWeight: '500' }}>
                 Hi I'm Malik Whitten 👋
-            </h1>
-            <br></br>
+            </h1> 
             <p>
                 Homeschooled Senior - attending North Technical High School in St. Louis, MO.
             </p>

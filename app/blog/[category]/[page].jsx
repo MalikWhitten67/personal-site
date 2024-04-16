@@ -29,11 +29,14 @@ export default function App() {
     let [blog, setBlog] = useState(!isServer && localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page] || {})
   
     let [loading, setLoading] = useState(true)
-     
+    if(isServer){
+        return (
+            <div></div>
+        )
+    }
     useEffect(() => {  
         setTimeout(()=>{ 
-            if(!isServer){
-                if (localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page]) { 
+             if (localStorage.getItem('blog') && JSON.parse(localStorage.getItem('blog'))[page]) { 
                     console.log('from cache')
                     setLoading(false)
                     return;
@@ -45,15 +48,9 @@ export default function App() {
                     setBlog(blog, 'blog')
                     setLoading(false)
                 })
-            }
-    
         },1500)
     }, [])  
-    if(isServer){
-        return (
-            <div></div>
-        )
-    }
+    
     if(loading) {
         return (
             <div key="blog" style={{ fontFamily: 'Arial', textAlign: 'center' , fontSize: '1.5rem', marginTop: '2rem' }}>
