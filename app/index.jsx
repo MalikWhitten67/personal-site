@@ -126,6 +126,12 @@ export default function App() {
                     - A  easier way to write backend code
                 </li>
                 <h3>Java Projects <img src="https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/java/java-original.svg" width={20} height={20}/></h3>
+                 <li>
+                    <a href='https://github.com/MalikWhitten67/vscript' target='_blank'>
+                       Vscript
+                    </a>
+                    - A staticly typed scripting language built ontop of java (<span style={{color:'red'}}>WIP</span>)
+                </li>
                 <li>
                     <a href='https://github.com/MalikWhitten67/calculator.java' target='_blank'>
                         Calculator.java
