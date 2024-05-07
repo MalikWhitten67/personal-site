@@ -1,0 +1,44 @@
+*{
+    font-family: sans-serif;  
+    margin: 0;
+    padding: 0;
+}
+
+body{ 
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: 0 auto;
+    padding:15px; 
+}
+ 
+ 
+@media only screen and (max-width: 720px) {
+    body { 
+        width:100%;
+    } 
+  }
+.navbar{ 
+    top:0;
+    display: flex; 
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+a{
+  color: rgb(17, 118, 226);
+}
+
+ul{
+    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+}
+
+ 
+li{
+    list-style: inside;
+}
