@@ -4,10 +4,10 @@ function ai(prompt, trainingData, context, memory) {
     let sensitivity = calculateSensitivity(context);
     let bestMatch = { input: "", output: "", score: 0 };
 
-    if(prompt.length <= 1) {
+    if (prompt.length <= 1) {
         return "Please provide a longer prompt!";
-    }    
-    if(prompt === ".exit") {
+    }
+    if (prompt === ".exit") {
         console.log("Goodbye!");
         process.exit();
     }
@@ -19,7 +19,7 @@ function ai(prompt, trainingData, context, memory) {
         let input = trainingData[i].input;
         let output = trainingData[i].output;
         let inputTokens = tokenize(input);
-        let score = calculateScore(inputTokens, promptTokens); 
+        let score = calculateScore(inputTokens, promptTokens);
         if (score > bestMatch.score) {
             bestMatch.input = input;
             bestMatch.output = output;
@@ -29,7 +29,7 @@ function ai(prompt, trainingData, context, memory) {
 
     // If a suitable match is found
     if (bestMatch.score >= sensitivity) {
-        updateMemory(memory, bestMatch.input, bestMatch.output);
+        updateMemory(memory, bestMatch.input, bestMatch.output, prompt);
         return bestMatch.output;
     } else {
         // If input is a special token
@@ -40,7 +40,7 @@ function ai(prompt, trainingData, context, memory) {
         // If not a special token, check conversation history
         let lastResponse = memory.lastResponse;
         if (lastResponse) {
-            let inferredResponse = inferResponse(lastResponse, trainingData);
+            let inferredResponse = inferResponse(lastResponse, trainingData, memory);
             if (inferredResponse) return inferredResponse;
         }
 
@@ -81,7 +81,6 @@ function isLowContext(token, contextTokens) {
     return commonWords.includes(token) || contextTokens.includes(token);
 }
 
-
 function tokenize(input) {
     // Tokenization without removing stop words
     return input.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/);
@@ -98,7 +97,6 @@ function calculateScore(inputTokens, promptTokens) {
     }
     return intersection / union.size;
 }
-
 
 function calculateSensitivity(context) {
     // Fixed sensitivity for now
@@ -141,15 +139,89 @@ function learn(trainingData, input, output) {
 }
 
 // Update memory with new input-output pair
-function updateMemory(memory, input, output) {
+function updateMemory(memory, input, output, prompt) {
     memory.rememberedInput = input;
-    memory.rememberedOutput = output;
-
-    // Save last response to a file 
-    localStorage.setItem('lastResponse', output);
+    memory.rememberedOutput = output; 
     memory.lastResponse = output;
+    sessionStorage.setItem('lastResponse', output)
+    sessionStorage.setItem('lastPrompt', prompt)
 }
- 
+
+// Check if the last response contains certain patterns
+function checkLast(lastResponse) {
+    let patterns = ["would you", "do you", "could you", "can you"];
+    for (let pattern of patterns) {
+        if (lastResponse.toLowerCase().includes(pattern)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Check if the user's response is affirmative
+function isAffirmative(response) {
+    let affirmatives = ["yes", "yeah", "sure", "of course", "absolutely", "definitely"];
+    for (let affirmative of affirmatives) {
+        if (response.toLowerCase().includes(affirmative)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 export function ask(prompt, context, memory) {
-    return ai(prompt, json, context, memory);
+    let response = ai(prompt, json, context, memory);
+    let lastResponse = sessionStorage.getItem('lastResponse')
+    let lastPrompt = sessionStorage.getItem('lastPrompt')
+
+    console.log(lastResponse, checkLast(lastResponse), isAffirmative(prompt))
+    if (lastResponse && checkLast(lastResponse)) {
+        // Trigger action to find more information
+        if (isAffirmative(prompt)) {
+            response = "Sure, I'll find more information for you.";
+            let context = extractContext(lastResponse);
+            let matchingInput = findMatchingInput(lastPrompt, lastResponse, json)
+            if (matchingInput) {
+                response = matchingInput.output;
+            } else {
+                response = "Sorry, I couldn't find more information on that.";
+            }
+        }
+    }
+    
+    // Extract context from the last response
+    function extractContext(lastResponse) {
+        // Here you can implement your logic to extract context from the last response.
+        // For demonstration purpose, let's just return the last word of the last response.
+        let words = lastResponse.split(/\s+/);
+        if (words.length > 0) {
+            return words[words.length - 1];
+        }
+        return null;
+    }
+    
+    // Find a matching input from the training data based on the context
+function findMatchingInput(context, lastResponse, trainingData) {
+    // Tokenize the context
+    let contextTokens = tokenize(context); 
+
+    // Filter training data to exclude the last response
+    let filteredData = trainingData.filter(data => data.output !== lastResponse);
+
+    // Look for a match in filtered training data
+    for (let data of filteredData) {
+        // Tokenize the input
+        let inputTokens = tokenize(data.input);
+        // Calculate score based on token overlap
+        let score = calculateScore(inputTokens, contextTokens); 
+
+        if (score > context.sensitivity || 0.5){
+            return data;
+        }
+    }
+    return null;
+}
+
+    
+    return response;
 }
