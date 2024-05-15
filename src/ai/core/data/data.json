@@ -4,7 +4,7 @@
       "output": "I'm continuously expanding my knowledge base to become more versatile and helpful. Currently, I'm diving deep into advanced conversational AI techniques and natural language processing to refine my ability to understand and respond to a wide variety of queries accurately and informatively."
     },
     {
-      "input": "This day feels endless.",
+      "input": "This day feels endless. long day sad day",
       "output": "I'm sorry to hear that you're feeling overwhelmed. Sometimes, taking a break, doing something you enjoy, or engaging in a hobby can help. Would you like me to suggest a relaxing activity or perhaps share a calming thought?"
     },
     {
@@ -143,51 +143,51 @@
       "output": "Sure! I can provide information on various car models, maintenance tips, buying guides, and more. What specific aspect of cars are you interested in?"
     },
     {
-      "input": "I'm curious about weather history.",
+      "input": "I'm curious about weather history. weather history tell me weather history",
       "output": "Absolutely! Weather history includes data on past temperatures, rainfall, storms, and more. Do you have a particular location or time period in mind?"
     },
     {
-      "input": "I want to know about tragic events.",
+      "input": "I want to know about tragic events. inform me about tragic events tragic events tell me about tragic events",
       "output": "Understood. Tragic events cover a wide range of incidents from natural disasters to human-made catastrophes. Is there a specific event or type of tragedy you're interested in learning about?"
     },
     {
-      "input": "Can you give me information on electric cars?",
+      "input": "Can you give me information on electric cars? electric cars tell me about electric cars electric cars information",
       "output": "Of course! Electric cars are becoming increasingly popular due to their environmental benefits and lower operating costs. Would you like to know about specific electric car models, charging infrastructure, or anything else?"
     },
     {
-      "input": "What's the weather forecast for tomorrow?",
+      "input": "What's the weather forecast for tomorrow? weather forecast tomorrow tell me tomorrow's weather forecast tomorrow's weather",
       "output": "Sure thing! I can provide you with tomorrow's weather forecast. Could you please tell me the location you're interested in?"
     },
     {
-      "input": "Tell me about aviation history.",
+      "input": "Tell me about aviation history. aviation history inform me about aviation history aviation history information",
       "output": "Aviation history is fascinating! It covers the development of aircraft, major milestones in flight, famous aviators, and more. Is there a particular aspect of aviation history you'd like to learn about?"
     },
     {
-      "input": "Can you tell me about natural disasters?",
+      "input": "Can you tell me about natural disasters? natural disasters inform me about natural disasters natural disasters information",
       "output": "Certainly! Natural disasters include events like earthquakes, hurricanes, floods, and wildfires. Is there a specific type of natural disaster or a particular event you're interested in?"
     },
     {
-      "input": "How does a car engine work?",
+      "input": "How does a car engine work? car engine explain how a car engine works car engine information",
       "output": "A car engine works by burning fuel to create power. It's a complex process involving combustion, pistons, and crankshafts. Would you like a more detailed explanation?"
     },
     {
-      "input": "What's the best way to save fuel when driving?",
+      "input": "What's the best way to save fuel when driving? save fuel driving tips save fuel tips",
       "output": "There are several ways to save fuel while driving, such as maintaining a steady speed, avoiding rapid acceleration and braking, and keeping your tires properly inflated. Would you like more tips?"
     },
     {
-      "input": "Tell me about famous car races.",
+      "input": "Tell me about famous car races. famous car races inform me about famous car races",
       "output": "Famous car races include events like the Monaco Grand Prix, Le Mans 24 Hours, and the Indianapolis 500. These races feature high-performance cars competing in thrilling competitions. Is there a specific race you're interested in?"
     },
     {
-      "input": "What are the most fuel-efficient cars?",
+      "input": "What are the most fuel-efficient cars? fuel-efficient cars tell me about fuel-efficient cars",
       "output": "There are many fuel-efficient cars available, including hybrid vehicles like the Toyota Prius, electric cars like the Tesla Model S, and fuel-efficient gasoline cars like the Honda Civic. Do you have a particular type of fuel efficiency in mind?"
     },
     {
-      "input": "How do hybrid cars work?",
+      "input": "How do hybrid cars work? hybrid cars explain how hybrid cars work hybrid cars information",
       "output": "Hybrid cars combine a gasoline engine with an electric motor and battery. They use the electric motor for low-speed driving and the gasoline engine for higher speeds. Would you like a more detailed explanation?"
     },
     {
-      "input": "Tell me about classic cars.",
+      "input": "Tell me about classic cars. classic cars inform me about classic cars classic cars information",
       "output": "Classic cars are typically older vehicles that are considered collectible due to their design, engineering, or historical significance. They often have a nostalgic appeal and can be quite valuable. Do you have a favorite classic car?"
     },
     {
@@ -195,19 +195,19 @@
       "output": "Climate change refers to long-term shifts in global weather patterns, often attributed to human activities such as burning fossil fuels and deforestation. It leads to rising temperatures, extreme weather events, and other environmental impacts. Would you like more information on this topic?"
     },
     {
-      "input": "What's the difference between weather and climate?",
+      "input": "What's the difference between weather and climate? weather vs climate explain weather vs climate",
       "output": "Weather refers to short-term atmospheric conditions in a specific area, such as temperature, humidity, and precipitation, while climate refers to long-term patterns of weather in a particular region. Would you like more details?"
     },
     {
-      "input": "How do airplanes stay in the air?",
+      "input": "How do airplanes stay in the air? airplanes stay in the air explain how airplanes stay in the air airplanes information",
       "output": "Airplanes stay in the air due to the lift generated by their wings. This lift is created by the flow of air over the wings, which is generated by the plane's forward motion. Would you like a more detailed explanation?"
     },
     {
-      "input": "Tell me about the deadliest hurricanes in history.",
+      "input": "Tell me about the deadliest hurricanes in history. deadliest hurricanes inform me about deadliest hurricanes deadliest hurricanes information",
       "output": "Some of the deadliest hurricanes in history include Hurricane Katrina, the Galveston Hurricane of 1900, and Typhoon Haiyan. These storms caused widespread devastation and loss of life. Is there a specific hurricane you're interested in?"
     },
     {
-      "input": "What causes tornadoes?",
+      "input": "What causes tornadoes? tornadoes explain what causes tornadoes tornadoes information",
       "output": "Tornadoes are caused by rotating columns of air within thunderstorms. When warm, moist air meets cold, dry air, it creates instability in the atmosphere, leading to the formation of tornadoes. Would you like more information on tornadoes?"
     },
     {
