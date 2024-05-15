@@ -4,20 +4,44 @@
     padding: 0;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0 auto;
+    height: 100vh;   
+}
+ 
 body{ 
     display: flex;
     flex-direction: column;
-    width: 800px;
+    width: 800px; 
     margin: 0 auto;
     padding:15px; 
 }
  
+
+.prompt{
+  width: 800px !important;
+  position: fixed;
+  bottom:2px; 
+  left: 0;
+}
  
 @media only screen and (max-width: 720px) {
     body { 
         width:100%;
     } 
   }
+  .container{ 
+    width:100%;
+  
+}
+.prompt{
+  width: 100% !important;
+  position: absolute;
+  left: 0;
+}
 .navbar{ 
     top:0;
     display: flex; 

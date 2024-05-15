@@ -37,7 +37,20 @@ function toElement(el){
  
   return e
 }
+/**
+ * @description Mutate the element
+ * @param {*} id 
+ * @param {*} prop 
+ * @param {*} value 
+ */
+function mutate(id, prop, value){
+    let el = document.getElementById(id)
+    el[prop] = value
+}
+
 export function render(el, container){
     container.innerHTML = "";
     container.appendChild(toElement(el()))
 }
+
+export { mutate }
