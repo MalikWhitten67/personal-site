@@ -1,36 +1,37 @@
-let json = await import('./core/data/data.json', { assert: { type: "json" } }).then((data) => data.default);
+ 
 import {render, h, mutate} from '../jsfiber/index.js'
 import './core/index.js'
 import { ask } from './core/index.js';
 let state = {
     prompt: "", 
 }
-function index(){ 
-    window.addEventListener('keydown', (e) => {
-        if(e.key === 'Enter'){
-             var i = 0;
-             let response =  ask(state.prompt, {sesitivity: 0.5},{})
-             mutate('prompt', 'disabled', true)  
-             mutate('prompt', 'value', 'Thinking...')
-             document.getElementById('prompt').style.cursor = 'not-allowed'
-             document.getElementById('prompt').style.opacity = '0.5'
-              // slowly type out the response
-                let interval = setInterval(() => {
-                    if(i < response.length){   
-                        // who made you ? : response
-                        mutate('response', 'innerHTML', state.prompt +  " : " +  response.slice(0, i  + 1) + "_")
-                        i++;
-                    }else{ 
-                        mutate('response', 'innerHTML',  document.getElementById('response').innerHTML.replace("_", "") + "<br>")
-                        mutate('prompt', 'value', '')
-                        mutate('prompt', 'disabled', false) 
-                        document.getElementById('prompt').style.cursor = 'text'
-                        document.getElementById('prompt').style.opacity = '1'
-                        clearInterval(interval)
-                    }
-                }, 50)
+function index() { 
+    window.addEventListener('keydown', async (e) => { // Note the async keyword here
+        if(e.key === 'Enter') {
+            let i = 0;
+            let response = await ask(state.prompt, { sensitivity: 0.5 }, {}); // Wait for the response from ask
+            mutate('prompt', 'disabled', true);  
+            mutate('prompt', 'value', 'Thinking...');
+            document.getElementById('prompt').style.cursor = 'not-allowed';
+            document.getElementById('prompt').style.opacity = '0.5';
+            
+            // Slowly type out the response
+            let interval = setInterval(() => {
+                if(i < response.length) {   
+                    mutate('response', 'innerHTML', state.prompt + " : " + response.slice(0, i + 1) + "_");
+                    i++;
+                } else {
+                    mutate('response', 'innerHTML', document.getElementById('response').innerHTML.replace("_", "") + "<br>");
+                    mutate('prompt', 'value', '');
+                    mutate('prompt', 'disabled', false); 
+                    document.getElementById('prompt').style.cursor = 'text';
+                    document.getElementById('prompt').style.opacity = '1';
+                    clearInterval(interval);
+                }
+            }, 50);
         }
-    })
+    });
+
     return h('div', {
         class: 'container',
     }, 
@@ -40,7 +41,7 @@ function index(){
                 fontSize: '34px', 
                 marginTop: '10px',
             }
-        }, 'Hello How can I help you today!'), 
+        }, 'Hello! How can I help you today?'), 
         h("p", {
             style:{
                 color: '#333',
@@ -71,7 +72,7 @@ function index(){
                 fontSize: '16px'
             },
             oninput: (e) => {
-                state.prompt = e.target.value
+                state.prompt = e.target.value;
             }
         }), 
         h('br', {}),
@@ -83,11 +84,10 @@ function index(){
                 opacity: '0.7',
                 margin: '0 auto',
                 textAlign: 'center',
-                marginTop: '15px !important',
+                marginTop: '16px !important',
             }
-        }, 'Emerald may make mistakes, please be patient overtime it will improve.')
-    )
-
+        }, 'Emerald may make mistakes, please be patient; over time, it will improve.')
+    );
 }
 
 render(index, document.getElementById('root'))
