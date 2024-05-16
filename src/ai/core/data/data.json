@@ -20,7 +20,7 @@
       "output": "Buenos días, ¿cómo estás?"
     },
     {
-      "input":"other ways cars can use gps how cars use gps car uses of gps navigation",
+      "input":"other ways cars can use gps how cars use gps car uses of gps navigation use of gps systems within cars",
       "output":"Geotagging: GPS can be used to geotag photos, videos, and other media, providing location information about where the content was captured."
     },
     {
@@ -195,11 +195,11 @@
       "output": "There are many fuel-efficient cars available, including hybrid vehicles like the Toyota Prius, electric cars like the Tesla Model S, and fuel-efficient gasoline cars like the Honda Civic. Do you have a particular type of fuel efficiency in mind?"
     },
     {
-      "input": "How do hybrid cars work? how do hybrids work hybrid cars explain how hybrid cars work hybrid cars information",
+      "input": "How do hybrid cars work? how do hybrids work hybrid cars inform me about hybrid cars explain how hybrid cars work hybrid cars information tell me more about hybrid cars explain hybrid cars",
       "output": "Hybrid cars combine a gasoline engine with an electric motor and battery. They use the electric motor for low-speed driving and the gasoline engine for higher speeds. Would you like a more detailed explanation?"
     },
     {
-      "input":"more information on hybrid cars",
+      "input":"more information on hybrid cars information on hybrid vehicles further information on hybrid vehicles",
       "output":"Hybrid vehicles, such as hybrid cars, combine a gasoline engine with an electric motor and battery pack, allowing the gasoline engine to operate alongside the electric motor, which is primarily used for low-speed driving and acceleration, while the battery pack stores energy, recharged through regenerative braking, to power the electric motor, resulting in improved fuel efficiency and reduced emissions compared to traditional gasoline-powered vehicles."
     },
     {
@@ -247,7 +247,7 @@
       "output": "Weather satellites orbit the Earth and use instruments to observe and monitor weather patterns from space. They provide valuable data for weather forecasting and climate monitoring. Would you like more details on how they operate?"
     },
     {
-      "input": "Tell me about famous shipwrecks.",
+      "input": "Tell me about famous shipwrecks. famous ship wrecks information on famous shipwrecks",
       "output": "Famous shipwrecks include the Titanic, the Lusitania, and the Andrea Doria. These maritime disasters are often the subject of historical interest and exploration. Is there a specific shipwreck you'd like to know more about?"
     },
     {
@@ -262,9 +262,13 @@
       "input": "Tell me about famous car designers.",
       "output": "Famous car designers include names like Ferdinand Porsche, Enzo Ferrari, and Carroll Shelby. These individuals have made significant contributions to automotive design and engineering. Is there a specific designer you're interested in?"
     },
+    {
+      "input":"what is your name, whats your name what should i call you what can i call you?",
+      "output":"Hi, you can call me Emerald"
+    },
 
     {
-        "input":"what is your name  what is your name? what is your name what can i call you",
+        "input":"what is your name  what is your name? what is your name what can i call you whats your name",
         "output":"My name is Emerald made by Malik ©️"
     },
     {

@@ -1,6 +1,7 @@
 let json = await import('./core/data/data.json', { assert: { type: "json" } }).then((data) => data.default);
 import {render, h, mutate} from '../jsfiber/index.js'
-import { ask } from './core/index.js' 
+import './core/index.js'
+import { ask } from './core/index.js';
 let state = {
     prompt: "", 
 }
@@ -8,7 +9,11 @@ function index(){
     window.addEventListener('keydown', (e) => {
         if(e.key === 'Enter'){
              var i = 0;
-             let response = ask(state.prompt, {sesitivity:0.5}, {});
+             let response =  ask(state.prompt, {sesitivity: 0.5},{})
+             mutate('prompt', 'disabled', true)  
+             mutate('prompt', 'value', 'Thinking...')
+             document.getElementById('prompt').style.cursor = 'not-allowed'
+             document.getElementById('prompt').style.opacity = '0.5'
               // slowly type out the response
                 let interval = setInterval(() => {
                     if(i < response.length){   
@@ -18,6 +23,9 @@ function index(){
                     }else{ 
                         mutate('response', 'innerHTML',  document.getElementById('response').innerHTML.replace("_", "") + "<br>")
                         mutate('prompt', 'value', '')
+                        mutate('prompt', 'disabled', false) 
+                        document.getElementById('prompt').style.cursor = 'text'
+                        document.getElementById('prompt').style.opacity = '1'
                         clearInterval(interval)
                     }
                 }, 50)
