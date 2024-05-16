@@ -1,5 +1,5 @@
-let json = await import('./data/data.json', { assert: { type: "json" } }).then((data) => data.default);
-
+et json = await fetch('/src/ai/core/data/data.json').then(res => res.json())
+window.json = json
 function ai(prompt, trainingData, context, memory) {
     let sensitivity = calculateSensitivity(context);
     let bestMatch = { input: "", output: "", score: 0 };
@@ -171,16 +171,14 @@ function isAffirmative(response) {
 
 export function ask(prompt, context, memory) {
     let response = ai(prompt, json, context, memory);
-    let lastResponse = sessionStorage.getItem('lastResponse')
-    let lastPrompt = sessionStorage.getItem('lastPrompt')
-
-    console.log(lastResponse, checkLast(lastResponse), isAffirmative(prompt))
+    let lastResponse = sessionStorage.getItem('lastResponse') || "";
+    let lastPrompt = sessionStorage.getItem('lastPrompt') || "";
     if (lastResponse && checkLast(lastResponse)) {
         // Trigger action to find more information
         if (isAffirmative(prompt)) {
             response = "Sure, I'll find more information for you.";
             let context = extractContext(lastResponse);
-            let matchingInput = findMatchingInput(lastPrompt, lastResponse, lastPrompt, json)
+            let matchingInput = findMatchingInput(context, lastResponse, lastPrompt, json)
             if (matchingInput) {
                 response = matchingInput.output;
             } else {
@@ -201,7 +199,6 @@ export function ask(prompt, context, memory) {
     }
 
     // Find a matching input from the training data based on the context
-    // Find a matching input from the training data based on the context
     function findMatchingInput(context, lastResponse, lastPrompt, trainingData) {
         let lastPromptTokens = tokenize(lastPrompt)
         let filteredData = trainingData.filter(data => data.output !== lastResponse);
@@ -221,6 +218,13 @@ export function ask(prompt, context, memory) {
         return null;
     }
 
+    // Update context sensitivity based on the conversation history
+    if (memory.conversationHistory && memory.conversationHistory.length > 0) {
+        let recentTrainingData = memory.conversationHistory.slice(-10); // Adjust the number as needed
+        let sensitivitySum = recentTrainingData.reduce((sum, item) => sum + item.score, 0);
+        context.sensitivity = sensitivitySum / recentTrainingData.length;
+    }
 
     return response;
 }
+
