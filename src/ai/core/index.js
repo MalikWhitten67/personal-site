@@ -1,4 +1,4 @@
-et json = await fetch('/src/ai/core/data/data.json').then(res => res.json())
+let json = await fetch('/src/ai/core/data/data.json').then(res => res.json())
 window.json = json
 function ai(prompt, trainingData, context, memory) {
     let sensitivity = calculateSensitivity(context);
